@@ -1,4 +1,4 @@
-[Uploading Quỹ Tài Chính Cá Nhân.html…]()
+[index.html](https://github.com/user-attachments/files/34855626/index.html)
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Quỹ Tài Chính Cá Nhân</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -275,7 +275,7 @@ function load(){
   n.plat.forEach(function(p){if(p.jar==='LTSS'&&o.emergency&&o.emergency!==OLD.emergency)p.bal0=o.emergency;if(p.jar==='FFA'&&o.invest&&o.invest!==OLD.invest)p.bal0=o.invest});
   return n}}catch(e){}
  return clone(DEF)}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));localStorage.setItem('qtc.ts',String(Date.now()))}catch(e){}}
 var S=load();
 
 /* ---------- helpers ---------- */
@@ -553,7 +553,7 @@ function renderStrat(R,P1,P2,sm){
 }
 function ckKey(){var d=new Date();return 'qtc.chk.'+d.getFullYear()+'-'+(d.getMonth()+1)}
 function chkLoad(){try{return JSON.parse(localStorage.getItem(ckKey()))||{}}catch(e){return {}}}
-function chkSave(c){try{localStorage.setItem(ckKey(),JSON.stringify(c))}catch(e){}}
+function chkSave(c){try{localStorage.setItem(ckKey(),JSON.stringify(c));localStorage.setItem('qtc.ts',String(Date.now()))}catch(e){}}
 
 /* ---------- UI: projection ---------- */
 function niceStep(x){var p=Math.pow(10,Math.floor(Math.log10(x))),f=x/p;return (f<=1?1:f<=2?2:f<=2.5?2.5:f<=5?5:10)*p}
@@ -1119,4 +1119,40 @@ if(location.hash)go(location.hash.slice(1),true);
 })();
 </script>
 
+<div style="text-align:center;padding:18px 12px 28px;font-size:13px;color:#555">
+<div id="bkts" style="margin-bottom:8px"></div>
+<button id="bkexp" style="font:inherit;padding:8px 14px">Xuất dữ liệu</button>
+<button id="bkimp" style="font:inherit;padding:8px 14px">Nhập dữ liệu</button>
+<input id="bkfile" type="file" accept=".json,application/json" hidden>
+<div id="bkmsg" style="margin-top:8px"></div></div>
+<script>(function(){
+function g(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function fmt(t){return t?new Date(+t).toLocaleString('vi-VN'):'chưa có'}
+function chkAll(){var o={};try{for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k&&k.indexOf('qtc.chk.')===0)o[k]=localStorage.getItem(k)}}catch(e){}return o}
+function show(){document.getElementById('bkts').textContent='Dữ liệu trên máy này cập nhật lần cuối: '+fmt(g('qtc.ts'))}
+function msg(t){document.getElementById('bkmsg').textContent=t}
+show();
+document.getElementById('bkexp').onclick=function(){
+ var s=g('qtc.v2');if(!s){msg('Chưa có dữ liệu để xuất.');return}
+ var ts=g('qtc.ts')||String(Date.now());
+ var blob=new Blob([JSON.stringify({qtc:1,s:s,chk:chkAll(),ts:+ts})],{type:'application/json'});
+ var d=new Date(+ts),p=function(n){return String(n).padStart(2,'0')};
+ var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+ a.download='quy-tai-chinh-'+d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+'-'+p(d.getHours())+p(d.getMinutes())+'.json';
+ document.body.appendChild(a);a.click();a.remove();msg('Đã tạo file sao lưu. Gửi file này sang máy kia rồi bấm "Nhập dữ liệu".')};
+var fi=document.getElementById('bkfile');
+document.getElementById('bkimp').onclick=function(){fi.click()};
+fi.onchange=function(){
+ var f=fi.files[0];fi.value='';if(!f)return;
+ var r=new FileReader();r.onload=function(){
+  var j;try{j=JSON.parse(r.result)}catch(e){msg('File không đọc được.');return}
+  if(!j||j.qtc!==1||!j.s){msg('Đây không phải file sao lưu của Quỹ Tài Chính.');return}
+  var lts=+g('qtc.ts')||0,m;
+  if(lts&&(j.ts||0)<lts)m='CẢNH BÁO: file này CŨ HƠN dữ liệu trên máy.\nFile: '+fmt(j.ts)+'\nMáy này: '+fmt(lts)+'\nNhập sẽ làm mất các thay đổi mới hơn. Vẫn nhập?';
+  else m='Nhập sẽ thay toàn bộ dữ liệu trên máy này bằng file (cập nhật '+fmt(j.ts)+'). Tiếp tục?';
+  if(!confirm(m))return;
+  try{localStorage.setItem('qtc.v2',j.s);for(var k in (j.chk||{}))localStorage.setItem(k,j.chk[k]);localStorage.setItem('qtc.ts',String(j.ts||Date.now()))}catch(e){msg('Không ghi được dữ liệu.');return}
+  location.reload()};
+ r.readAsText(f)};
+})();</script>
 </body></html>
