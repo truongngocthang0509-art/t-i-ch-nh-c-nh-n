@@ -1,0 +1,1129 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Quỹ Tài Chính Cá Nhân</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: sticky green header + 4 tabs (Hồ sơ, Chẩn đoán, Chiến lược, Dự phóng); one column on phone, wider reading column on desktop. */
+:root{
+  --bg:#F2F6F1; --surface:#FFFFFF; --fg:#12251A; --muted:#58695F; --line:#D8E2DA; --tint:#E7F0E9;
+  --hdr:#1B4D37; --hdr-fg:#F1F7F3; --hdr-muted:#A9C7B6; --brand:#1E5A40; --brand-ink:#FFFFFF;
+  --gold:#A86F12; --good:#1C7F4D; --warn:#A86F12; --bad:#B93A34;
+  --good-bg:#DDF0E4; --warn-bg:#F7EBCF; --bad-bg:#F7DEDB;
+  --c-nec:#2F6FB5; --c-ffa:#2E9B5E; --c-ltss:#12858A; --c-edu:#C9741F; --c-play:#7B52C4; --c-give:#C9453F; --c-debt:#7A3434;
+  --line-a:#8B9A91;
+  --f-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-num:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0C1611; --surface:#14231A; --fg:#E3EEE7; --muted:#97A99E; --line:#27392E; --tint:#1A2D22;
+  --hdr:#0F2A1E; --hdr-fg:#EAF4EE; --hdr-muted:#86A894; --brand:#44A87D; --brand-ink:#08140E;
+  --gold:#E2A93B; --good:#4CC38A; --warn:#E2A93B; --bad:#F0807A;
+  --good-bg:#183326; --warn-bg:#35290F; --bad-bg:#3A1C1A;
+  --c-nec:#6AA6E8; --c-ffa:#4CC38A; --c-ltss:#3DBDBD; --c-edu:#F0A258; --c-play:#A98BE8; --c-give:#F0807C; --c-debt:#D98A8A;
+  --line-a:#7F9287; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0C1611; --surface:#14231A; --fg:#E3EEE7; --muted:#97A99E; --line:#27392E; --tint:#1A2D22;
+  --hdr:#0F2A1E; --hdr-fg:#EAF4EE; --hdr-muted:#86A894; --brand:#44A87D; --brand-ink:#08140E;
+  --gold:#E2A93B; --good:#4CC38A; --warn:#E2A93B; --bad:#F0807A;
+  --good-bg:#183326; --warn-bg:#35290F; --bad-bg:#3A1C1A;
+  --c-nec:#6AA6E8; --c-ffa:#4CC38A; --c-ltss:#3DBDBD; --c-edu:#F0A258; --c-play:#A98BE8; --c-give:#F0807C; --c-debt:#D98A8A;
+  --line-a:#7F9287; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.55;margin:0;padding:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--hdr);z-index:30}
+h1,h2,h3,p{margin:0}
+h2{font-size:17px;font-weight:700;line-height:1.3;text-wrap:balance}
+h3{font-size:15px;font-weight:700}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.wrap{max-width:860px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--hdr);color:var(--hdr-fg)}
+.hrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px 8px}
+.brand{font-size:18px;font-weight:800;letter-spacing:.01em;line-height:1.2}
+.brand small{display:block;font-size:12px;font-weight:400;color:var(--hdr-muted);letter-spacing:0}
+.pill{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--hdr-muted);white-space:nowrap}
+.pill b{font-family:var(--f-num);font-size:20px;color:var(--hdr-fg)}
+nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav button{flex:1 0 auto;background:none;border:0;border-bottom:3px solid transparent;color:var(--hdr-muted);font:600 14px var(--f-body);padding:10px 12px 9px;cursor:pointer;white-space:nowrap}
+nav button[aria-selected="true"]{color:var(--hdr-fg);border-bottom-color:var(--gold)}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+main{padding-block:20px 56px}
+.panel{display:none;flex-direction:column;gap:28px}
+.panel.on{display:flex}
+.sec{display:flex;flex-direction:column;gap:12px;min-width:0}
+.sec>p.lead{color:var(--muted);font-size:14px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px}
+
+/* inputs */
+.note{display:flex;gap:12px;align-items:center;justify-content:space-between;background:var(--tint);border-radius:8px;padding:10px 14px;font-size:13px}
+.note button,.btn{background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;font:600 13px var(--f-body);padding:8px 14px;cursor:pointer;white-space:nowrap}
+.btn.ghost{background:none;color:var(--fg);border:1px solid var(--line)}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px 18px}
+.field{display:flex;flex-direction:column;gap:4px;min-width:0}
+.field label{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.tag{font:700 10px var(--f-num);color:#fff;border-radius:3px;padding:1px 5px;letter-spacing:.04em}
+.inp{display:flex;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:8px}
+.inp:focus-within{border-color:var(--brand)}
+.inp input{flex:1;min-width:0;border:0;background:none;color:var(--fg);font:500 16px var(--f-num);padding:10px 4px 10px 12px;outline:none}
+.inp span{color:var(--muted);font-size:12px;padding-right:12px;white-space:nowrap}
+
+/* diagnosis */
+.hero{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.ring{flex:none;width:132px;height:132px}
+.ring text{font-family:var(--f-num);fill:var(--fg)}
+.hero .t{flex:1;min-width:220px;display:flex;flex-direction:column;gap:6px}
+.grade{font-size:22px;font-weight:800}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats div{padding:12px 12px 12px 0;display:flex;flex-direction:column;gap:2px}
+.stats b{font:600 18px var(--f-num)}
+.stats small{font-size:12px;color:var(--muted)}
+.comp{display:grid;gap:10px}
+.comp .r{display:grid;grid-template-columns:minmax(110px,1.1fr) 3fr auto;gap:10px;align-items:center;font-size:13px}
+.track{height:8px;border-radius:4px;background:var(--tint);position:relative;overflow:hidden}
+.track i{position:absolute;inset:0 auto 0 0;border-radius:4px;background:var(--brand)}
+.find{display:flex;flex-direction:column;gap:0}
+.find .f{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.find .f:first-child{border-top:1px solid var(--line)}
+.chip{font-size:11px;font-weight:700;border-radius:20px;padding:2px 9px;white-space:nowrap;align-self:start;margin-top:2px}
+.chip.bad{background:var(--bad-bg);color:var(--bad)} .chip.warn{background:var(--warn-bg);color:var(--warn)} .chip.good{background:var(--good-bg);color:var(--good)}
+.find p{font-size:13.5px;color:var(--muted);grid-column:2}
+.find h3{font-size:14.5px;grid-column:2;grid-row:1}
+.find .chip{grid-column:1;grid-row:1}
+.jars{display:flex;flex-direction:column}
+.jr{display:grid;grid-template-columns:minmax(96px,1fr) 3fr minmax(70px,auto);gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}
+.jr .nm{display:flex;align-items:center;gap:6px;min-width:0}
+.bar{position:relative;height:12px;background:var(--tint);border-radius:3px}
+.bar i{position:absolute;inset:0 auto 0 0;border-radius:3px}
+.bar u{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--fg);text-decoration:none}
+.jr .v{text-align:right;line-height:1.25}
+.jr .v b{font:600 13px var(--f-num)}
+.jr .v small{display:block;font-size:11px}
+.legend{font-size:12px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap}
+.legend u{display:inline-block;width:2px;height:12px;background:var(--fg);vertical-align:-2px;margin-right:5px;text-decoration:none}
+
+/* strategy */
+.verdict{background:var(--hdr);color:var(--hdr-fg);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:6px}
+.verdict small{font-size:12px;color:var(--hdr-muted);letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.verdict p{font-size:16px;font-weight:600;line-height:1.45}
+.golden{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;justify-content:center;background:var(--tint);border-radius:8px;padding:12px 14px;font-size:13.5px;text-align:center}
+.golden b{font-family:var(--f-num)}
+ol.stages{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.stage{display:grid;grid-template-columns:32px 1fr auto;gap:2px 12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.stage:first-child{border-top:1px solid var(--line)}
+.stage .n{grid-row:1/3;width:28px;height:28px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font:700 13px var(--f-num);color:var(--muted)}
+.stage.done .n{background:var(--good);border-color:var(--good);color:#fff}
+.stage.cur .n{background:var(--gold);border-color:var(--gold);color:#fff}
+.stage h3{font-size:14.5px}
+.stage p{font-size:13px;color:var(--muted);grid-column:2/4}
+.stage .eta{font:600 12px var(--f-num);color:var(--muted);align-self:center;text-align:right}
+.stage.cur h3{color:var(--gold)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:560px}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;text-align:right;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:right;font-family:var(--f-num);font-variant-numeric:tabular-nums;white-space:nowrap}
+th:first-child,td:first-child{text-align:left;font-family:var(--f-body)}
+td.w{text-align:left;font-family:var(--f-body);white-space:normal;color:var(--muted);min-width:150px}
+th.w{text-align:left}
+tr:last-child td{border-bottom:0}
+td .tag{margin-right:6px}
+.up{color:var(--good)} .dn{color:var(--bad)}
+.flow{display:flex;flex-direction:column;gap:0}
+.flow .s{display:grid;grid-template-columns:1fr auto;gap:2px 14px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.flow .s:first-child{border-top:1px solid var(--line)}
+.flow .s small{color:var(--muted);font-size:12.5px;grid-column:1}
+.flow .s b{font:600 14px var(--f-num);grid-row:1/3;grid-column:2;align-self:center}
+.princ{display:grid;gap:0}
+.princ details{border-bottom:1px solid var(--line);padding:2px 0}
+.princ details:first-child{border-top:1px solid var(--line)}
+.princ summary{cursor:pointer;font-weight:600;font-size:14.5px;padding:11px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.princ summary::-webkit-details-marker{display:none}
+.princ summary::after{content:"+";color:var(--muted);font-weight:400}
+.princ details[open] summary::after{content:"−"}
+.princ p{font-size:13.5px;color:var(--muted);padding-bottom:12px}
+.chk{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.chk label{display:grid;grid-template-columns:22px 1fr;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px;cursor:pointer;font-size:13.5px}
+.chk input{width:18px;height:18px;margin:2px 0 0;accent-color:var(--brand)}
+.chk b{display:block;font-size:14px}
+.chk span{color:var(--muted)}
+.chk input:checked+div b{text-decoration:line-through;color:var(--muted)}
+ul.acts{margin:0;padding:0 0 0 18px;display:grid;gap:8px;font-size:14px}
+
+/* projection */
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;align-self:flex-start}
+.seg button{background:var(--surface);color:var(--fg);border:0;border-right:1px solid var(--line);font:600 13px var(--f-body);padding:8px 16px;cursor:pointer}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--brand);color:var(--brand-ink)}
+.chartbox{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 8px 8px}
+svg.ch{width:100%;height:auto;display:block}
+.ch text{font-family:var(--f-num);font-size:11px;fill:var(--muted)}
+.cmp table{min-width:0}
+.ch .lab{fill:var(--fg);font-weight:600}
+.ch .grid{stroke:var(--line);stroke-width:1}
+.ch .la{stroke:var(--line-a);fill:none;stroke-width:2;stroke-dasharray:5 4}
+.ch .lb{stroke:var(--brand);fill:none;stroke-width:2.5}
+.ch .ar{fill:var(--brand);opacity:.12}
+.ch .gl{stroke:var(--gold);stroke-width:1.5;stroke-dasharray:2 4}
+.ch .dot{fill:var(--brand);stroke:var(--surface);stroke-width:2}
+.ch .dotg{fill:var(--gold);stroke:var(--surface);stroke-width:2}
+.key{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);padding:6px 8px 0}
+.key i{display:inline-block;width:18px;height:0;border-top:3px solid var(--brand);vertical-align:3px;margin-right:6px}
+.key i.a{border-top:2px dashed var(--line-a)}
+.cmp td.best{color:var(--good);font-weight:600}
+.fine{font-size:12px;color:var(--muted);line-height:1.5}
+.empty{padding:40px 0;text-align:center;color:var(--muted)}
+.plats{display:grid;gap:12px}.pl{display:flex;flex-direction:column;gap:10px}
+#pj-dyn{display:flex;flex-direction:column;gap:28px}
+.pvr{display:grid;grid-template-columns:1fr minmax(130px,170px);gap:2px 12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.pvr:first-child{border-top:1px solid var(--line)}
+.pvr .nm{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:14px}
+.pvr .nm small{flex-basis:100%;color:var(--muted);font-size:12px}
+.pvr .sg{grid-column:1;font-size:12px;color:var(--muted)}
+.pvr .inp{grid-column:2;grid-row:1/3}
+.pvr .inp input{font-size:15px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.hint{font:500 12px var(--f-num);color:var(--muted);min-height:0}
+.inp .mh{font:500 12px var(--f-num);color:var(--muted);font-style:normal;padding-right:8px;white-space:nowrap}
+.inp select.u{flex:none;width:auto;border-left:1px solid var(--line);padding:10px 10px;font-size:14px}
+.lg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--muted);padding:6px 10px 2px}
+.lg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.pie{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:6px 10px}
+.pie svg{width:150px;height:150px;flex:none}
+.pie ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:13px;flex:1;min-width:190px}
+.pie li{display:grid;grid-template-columns:12px 1fr auto;gap:8px;align-items:center}
+.pie li i{width:10px;height:10px;border-radius:2px}
+.pie li b{font:600 12px var(--f-num)}
+.chartbox h3{padding:0 8px 6px;font-size:14px}
+#st-charts{gap:14px}
+.subh{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:6px}
+.box h3{font-size:14px}
+/* sổ thu */
+.inp.big input{font-size:22px;padding:12px 4px 12px 14px}
+.inp input:disabled{opacity:.7}
+.inp select{flex:1;min-width:0;border:0;background:none;color:var(--fg);font:500 15px var(--f-body);padding:11px 8px;outline:none}
+.inp input[type=date],.inp input[type=text]{font-family:var(--f-body);font-size:15px}
+.cb{display:flex;gap:8px;align-items:center;font-size:13.5px;cursor:pointer}
+.cb input{width:18px;height:18px;accent-color:var(--brand)}
+.flow .s em{font:600 11px var(--f-num);color:var(--muted);font-style:normal;margin-left:6px}
+.flow .s b.neg{color:var(--bad)}
+.hist .s{grid-template-columns:1fr auto auto;align-items:center}
+.hist .s .x{grid-row:1/3;grid-column:3}
+.x{background:none;border:1px solid var(--line);color:var(--muted);border-radius:6px;font:600 12px var(--f-body);padding:5px 9px;cursor:pointer}
+.chip.k{background:var(--tint);color:var(--muted);margin-right:6px}
+#q-msg{min-height:1.2em;color:var(--good)}
+@media (max-width:420px){.comp .r{grid-template-columns:1fr auto}.comp .r .track{grid-column:1/3;grid-row:2}.jr{grid-template-columns:1fr auto}.jr .bar{grid-column:1/3;grid-row:2}}
+@media (prefers-reduced-motion:no-preference){.track i,.bar i{transition:width .3s}}
+</style>
+
+<header>
+  <div class="wrap">
+    <div class="hrow">
+      <div class="brand">Quỹ Tài Chính Cá Nhân<small>Mô hình 6 hũ · ví và lãi suất do bạn nhập</small></div>
+      <div class="pill"><span>Sức khoẻ<br>tài chính</span><b id="hscore">–</b></div>
+    </div>
+    <nav role="tablist" aria-label="Các phần">
+      <button role="tab" data-tab="so-thu" aria-selected="true">Sổ thu</button>
+      <button role="tab" data-tab="tiet-kiem" aria-selected="false">Tiết kiệm</button>
+      <button role="tab" data-tab="thong-ke" aria-selected="false">Thống kê</button>
+      <button role="tab" data-tab="ho-so" aria-selected="false">Hồ sơ</button>
+      <button role="tab" data-tab="chan-doan" aria-selected="false">Chẩn đoán</button>
+      <button role="tab" data-tab="chien-luoc" aria-selected="false">Chiến lược</button>
+      <button role="tab" data-tab="du-phong" aria-selected="false">Dự phóng</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="panel on" id="p-so-thu"></div>
+  <div class="panel" id="p-tiet-kiem"></div>
+  <div class="panel" id="p-thong-ke"></div>
+  <div class="panel" id="p-ho-so"></div>
+  <div class="panel" id="p-chan-doan"></div>
+  <div class="panel" id="p-chien-luoc"></div>
+  <div class="panel" id="p-du-phong"></div>
+</main>
+
+<script>
+(function(){
+'use strict';
+var JARS=[
+ {k:'NEC', n:'Thiết yếu',        p:55,c:'--c-nec', w:'Vietcombank (tài khoản nhận lương)', d:'Ăn uống, nhà ở, đi lại, điện nước, học phí'},
+ {k:'FFA', n:'Tự do tài chính',  p:10,c:'--c-ffa', w:'App đầu tư dài hạn',                  d:'Đầu tư tạo dòng tiền, không rút để tiêu'},
+ {k:'LTSS',n:'Tiết kiệm dài hạn',p:10,c:'--c-ltss',w:'ZaloPay (tiền tích kiệm)',            d:'Quỹ khẩn cấp, khoản mua lớn, dự án tương lai'},
+ {k:'EDU', n:'Phát triển',       p:10,c:'--c-edu', w:'Vietcombank (phát triển)',            d:'Sách, khoá học, kỹ năng, ngoại ngữ, công cụ làm việc'},
+ {k:'PLAY',n:'Hưởng thụ',        p:10,c:'--c-play',w:'MoMo (chi tiêu lặt vặt)',             d:'Cà phê, ăn uống bạn bè, đồ yêu thích, thư giãn'},
+ {k:'GIVE',n:'Cho đi',           p:5, c:'--c-give',w:'BIDV (tiền quà gửi)',                 d:'Quà sinh nhật, giúp đỡ người thân, từ thiện'}
+];
+var WALLET_DEBT='Trả nợ từ ví của bạn';
+var DEF={income:0,other:0,a:{NEC:0,FFA:0,LTSS:0,EDU:0,PLAY:0,GIVE:0},
+ emergency:0,invest:0,debt:0,debtRate:0,minPay:0,debts:[],loans:[],rSave:0,rInv:0,goal:0,goalYears:0,h:10,touched:false,mode:'simple',log:[],spend:[],deposits:[],
+ plat:[{id:'p1',months:0,name:'Vietcombank',jar:'NEC',bal0:0,rate:0},{id:'p2',months:0,name:'Vietcombank (phát triển)',jar:'EDU',bal0:0,rate:0},{id:'p3',months:0,name:'App đầu tư dài hạn',jar:'FFA',bal0:0,rate:0},{id:'p4',months:0,name:'ZaloPay',jar:'LTSS',bal0:0,rate:0},{id:'p5',months:0,name:'MoMo',jar:'PLAY',bal0:0,rate:0},{id:'p6',months:0,name:'BIDV',jar:'GIVE',bal0:0,rate:0}]};
+var KEY='qtc.v2';
+function clone(o){return JSON.parse(JSON.stringify(o))}
+var OLD={income:12000000,a:{NEC:7200000,FFA:600000,LTSS:600000,EDU:400000,PLAY:1800000,GIVE:200000},goal:200000000,goalYears:8,emergency:15000000,invest:20000000};
+function load(){
+ try{var j=JSON.parse(localStorage.getItem(KEY));if(j&&j.a){var d=clone(DEF);for(var k in j)if(k!=='a')d[k]=j[k];for(var q in j.a)d.a[q]=j.a[q];return d}}catch(e){}
+ try{var o=JSON.parse(localStorage.getItem('qtc.v1'));if(o&&o.a){var n=clone(DEF);
+  ['log','spend','debts','touched','h'].forEach(function(k){if(o[k]!==undefined)n[k]=o[k]});
+  ['income','goal','goalYears'].forEach(function(k){if(o[k]!==undefined&&o[k]!==OLD[k])n[k]=o[k]});
+  for(var q2 in o.a)if(o.a[q2]!==OLD.a[q2])n.a[q2]=o.a[q2];
+  n.plat.forEach(function(p){if(p.jar==='LTSS'&&o.emergency&&o.emergency!==OLD.emergency)p.bal0=o.emergency;if(p.jar==='FFA'&&o.invest&&o.invest!==OLD.invest)p.bal0=o.invest});
+  return n}}catch(e){}
+ return clone(DEF)}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+var S=load();
+
+/* ---------- helpers ---------- */
+function $(s,r){return (r||document).querySelector(s)}
+function fmt(n){return Math.round(n).toLocaleString('vi-VN')}
+function vnd(n){return fmt(n)+' đ'}
+function sh(n){var a=Math.abs(n),s=n<0?'−':'';
+ if(a>=1e9)return s+(a/1e9).toFixed(2).replace('.',',')+' tỷ';
+ if(a>=1e6)return s+(a/1e6).toFixed(a>=1e8?0:1).replace('.',',')+' tr';
+ if(a>=1e3)return s+Math.round(a/1e3)+'k';return s+Math.round(a)}
+function p1(n){return (Math.round(n*10)/10).toString().replace('.',',')+'%'}
+function mo(m){if(m==null)return 'Chưa đạt sau 40 năm';if(m===0)return 'Đã đạt';if(m<12)return m+' tháng';var y=m/12;return (Math.round(y*10)/10).toString().replace('.',',')+' năm'}
+function getP(k){return k.indexOf('a.')===0?S.a[k.slice(2)]:S[k]}
+function setP(k,v){if(k.indexOf('a.')===0)S.a[k.slice(2)]=v;else S[k]=v}
+function jar(k){return JARS.filter(function(j){return j.k===k})[0]}
+
+/* ---------- analysis ---------- */
+function analyze(s){
+ var inc=Math.max(0,s.income+s.other),a=s.a,sum=0;
+ JARS.forEach(function(j){sum+=a[j.k]});
+ var R={inc:inc,sum:sum,leak:inc-sum};
+ R.pct=function(k){return inc?a[k]/inc*100:0};
+ R.necPct=R.pct('NEC');
+ R.em=a.NEC>0?s.emergency/a.NEC:0;
+ R.sr=inc?(a.FFA+a.LTSS)/inc*100:0;
+ R.hi=s.debt>0&&s.debtRate>=12;
+ R.debtMonthlyInt=s.debt*s.debtRate/1200;
+ var comps=[];
+ comps.push({n:'Tỷ lệ tiết kiệm + đầu tư',max:30,v:30*Math.min(1,R.sr/20),note:p1(R.sr)+' thu nhập'});
+ comps.push({n:'Quỹ khẩn cấp',max:25,v:25*Math.min(1,R.em/6),note:p1(R.em)+' tháng'});
+ var ds=s.debt<=0?20:Math.max(0,Math.min(20,20-(inc?s.debt/inc:9)*3-(R.hi?6:0)));
+ comps.push({n:'Gánh nặng nợ',max:20,v:ds,note:s.debt>0?sh(s.debt):'Không nợ'});
+ var ns=R.necPct<=55?15:Math.max(0,15-(R.necPct-55)*0.75);
+ comps.push({n:'Chi thiết yếu ≤ 55%',max:15,v:inc?ns:0,note:p1(R.necPct)});
+ var lr=inc?Math.max(0,R.leak/inc):1,ls=R.leak<0?0:10*(1-Math.min(1,lr/0.15));
+ comps.push({n:'Kiểm soát dòng tiền',max:10,v:inc?ls:0,note:R.leak<0?'Chi vượt thu':p1(inc?lr*100:0)+' chưa gán hũ'});
+ R.comps=comps;
+ R.score=Math.round(comps.reduce(function(t,c){return t+c.v},0));
+ R.grade=R.score>=80?['Vững vàng','good']:R.score>=60?['Khá ổn, còn chỗ tối ưu','good']:R.score>=40?['Cần chỉnh lại cấu trúc','warn']:['Báo động, cần xử lý ngay','bad'];
+ return R;
+}
+
+function findings(s,R){
+ var f=[],a=s.a;
+ if(R.leak<0)f.push({sev:'bad',t:'Chi vượt thu '+vnd(-R.leak)+' mỗi tháng',d:'Tổng chi các hũ lớn hơn thu nhập. Khoản thiếu đang được bù bằng nợ hoặc tiền tiết kiệm. Hãy kiểm tra lại số liệu hoặc cắt chi ngay.'});
+ else if(R.inc&&R.leak/R.inc>0.05)f.push({sev:'warn',t:vnd(R.leak)+' mỗi tháng không thuộc hũ nào',d:'Đây là phần tiền bị rò rỉ ('+p1(R.leak/R.inc*100)+' thu nhập). Giao nó cho một hũ ngay khi lương về, nếu không nó sẽ biến mất vào chi tiêu vặt.'});
+ if(R.hi)f.push({sev:'bad',t:'Nợ lãi '+s.debtRate+'%/năm đang ăn '+vnd(R.debtMonthlyInt)+' mỗi tháng',d:'Trả nợ này cho lợi suất chắc chắn '+s.debtRate+'%/năm, cao hơn mọi kênh đầu tư an toàn. Ưu tiên trả nợ trước khi tăng đầu tư.'});
+ else if(s.debt>0)f.push({sev:'warn',t:'Còn nợ '+vnd(s.debt)+' với lãi '+s.debtRate+'%/năm',d:'Lãi suất ở mức vừa. Vẫn trả đều, đồng thời xây quỹ khẩn cấp song song.'});
+ if(R.em<1)f.push({sev:'bad',t:'Quỹ khẩn cấp chưa đủ 1 tháng chi thiết yếu',d:'Một biến cố nhỏ (ốm, mất việc, hỏng xe) sẽ buộc bạn vay thêm. Đây là lỗ hổng cần vá đầu tiên.'});
+ else if(R.em<3)f.push({sev:'bad',t:'Quỹ khẩn cấp mới được '+p1(R.em)+' tháng',d:'Mục tiêu tối thiểu là 3 tháng, lý tưởng 6 tháng chi thiết yếu ('+vnd(a.NEC*3)+' đến '+vnd(a.NEC*6)+').'});
+ else if(R.em<6)f.push({sev:'warn',t:'Quỹ khẩn cấp '+p1(R.em)+' tháng, đã qua mức tối thiểu',d:'Tiếp tục nạp cho đến khi đủ 6 tháng ('+vnd(a.NEC*6)+'), sau đó chuyển phần tiết kiệm sang đầu tư.'});
+ else f.push({sev:'good',t:'Quỹ khẩn cấp đủ '+p1(R.em)+' tháng',d:'Tấm đệm vững. Phần tiết kiệm mới có thể chuyển dần sang đầu tư dài hạn.'});
+ if(s.irregular)f.push({sev:'warn',t:s.nDone>=2?'Thu nhập dao động '+Math.round(s.cv*100)+'% giữa các tháng':'Thu nhập không cố định',d:'Với thu nhập không đều, quỹ khẩn cấp nên dày hơn: mục tiêu 6 tháng chi thiết yếu thay vì 3. Kế hoạch đã dành thêm phần cho hũ Tiết kiệm dài hạn.'});
+ if(R.sr<10)f.push({sev:'bad',t:'Chỉ tiết kiệm và đầu tư '+p1(R.sr)+' thu nhập',d:'Dưới 10% thì tài sản tăng rất chậm. Mức nên có là 20% (hũ FFA 10% + LTSS 10%).'});
+ else if(R.sr<20)f.push({sev:'warn',t:'Tiết kiệm và đầu tư '+p1(R.sr)+' thu nhập',d:'Gần chuẩn 20%. Đẩy thêm '+p1(20-R.sr)+' điểm nữa để đạt chuẩn.'});
+ else f.push({sev:'good',t:'Tiết kiệm và đầu tư '+p1(R.sr)+' thu nhập',d:'Bạn đã đạt hoặc vượt chuẩn 20%. Giữ kỷ luật này bằng lệnh chuyển tự động.'});
+ if(R.inc&&R.necPct>55)f.push({sev:R.necPct>65?'bad':'warn',t:'Chi thiết yếu chiếm '+p1(R.necPct)+' (chuẩn 55%)',d:'Vượt chuẩn khoảng '+vnd(a.NEC-R.inc*0.55)+' mỗi tháng. Xem lại tiền nhà, ăn uống, gói cước và các khoản đăng ký định kỳ.'});
+ if(R.inc&&R.pct('PLAY')>15)f.push({sev:'warn',t:'Hưởng thụ chiếm '+p1(R.pct('PLAY'))+' (chuẩn 10%)',d:'Đây là hũ dễ cắt nhất mà ít ảnh hưởng đến sinh hoạt thiết yếu.'});
+ if(R.inc&&R.pct('EDU')<5)f.push({sev:'warn',t:'Hũ Phát triển chỉ '+p1(R.pct('EDU')),d:'Thu nhập là đòn bẩy lớn nhất của tài sản. Giữ tối thiểu 5 đến 6% cho kỹ năng.'});
+ var order={bad:0,warn:1,good:2};
+ return f.sort(function(x,y){return order[x.sev]-order[y.sev]});
+}
+
+/* ---------- optimal plan ---------- */
+function makePlan(s,R){
+ var P={NEC:55,FFA:10,LTSS:10,EDU:10,PLAY:10,GIVE:5,DEBT:0},fl={PLAY:5,GIVE:3,EDU:6,FFA:5,LTSS:5},short=0,inc=R.inc;
+ function take(amt,order){var got=0;for(var i=0;i<order.length&&got<amt;i++){var k=order[i],can=Math.max(0,P[k]-fl[k]),t=Math.min(can,amt-got);P[k]-=t;got+=t}return got}
+ var freed=0,n=R.necPct;
+ if(inc&&n>55){var tg=Math.min(70,Math.max(55,Math.round(n-3))),need=tg-55,g=take(need,['PLAY','GIVE','EDU','FFA']);P.NEC+=g;short+=need-g}
+ else if(inc&&n>0&&n<50){var t2=Math.max(45,Math.round(n)+2);freed=55-t2;P.NEC=t2}
+ if(s.debt>0&&inc){var minPct=Math.ceil(s.minPay/inc*100),dp=Math.min(25,R.hi?Math.max(15,minPct):Math.max(5,minPct)),gd=take(dp,['PLAY','GIVE','FFA','EDU']);P.DEBT=gd;short+=dp-gd}
+ if(freed){if(s.debt>0&&R.hi)P.DEBT+=freed;else if(R.em<6)P.LTSS+=freed;else P.FFA+=freed}
+ if(R.em<3&&inc){var ge=take(6,['PLAY','GIVE','EDU','FFA']);P.LTSS+=ge}
+ else if(s.irregular&&R.em<6&&inc){P.LTSS+=take(4,['PLAY','GIVE','EDU'])}
+ else if(R.em>=6&&s.debt<=0&&!s.irregular){P.LTSS-=5;P.FFA+=5}
+ P.short=short;
+ return P;
+}
+function plan2(s,R){var s2=clone(s);s2.debt=0;return makePlan(s2,R)}
+
+/* ---------- simulation ---------- */
+function simulate(s,R,P1,P2){
+ var N=480,inc=R.inc,a=s.a,rs=s.rSave/1200,ri=s.rInv/1200,rd=s.debtRate/1200;
+ var A=[s.emergency+s.invest-s.debt],B=[A[0]];
+ var D=s.debt,E=s.emergency,I=s.invest,dfA=s.debt>0?null:0,emA=s.emergency>=6*a.NEC?0:null;
+ var m,due,pay;
+ for(m=1;m<=N;m++){
+  if(D>0.5){due=D*(1+rd);pay=Math.min(due,s.minPay);D=due-pay;if(D<0.5){D=0;if(dfA==null)dfA=m}}
+  E=E*(1+rs)+a.LTSS;I=I*(1+ri)+a.FFA;
+  if(emA==null&&E>=6*a.NEC)emA=m;
+  A.push(E+I-D);
+ }
+ var Et=6*inc*P1.NEC/100;
+ D=s.debt;E=s.emergency;I=s.invest;var dfB=s.debt>0?null:0,emB=E>=Et?0:null,left,budget,pl,lt,ff,need,toE;
+ for(m=1;m<=N;m++){
+  pl=D>0.5?P1:P2;left=0;
+  if(D>0.5){budget=Math.max(inc*pl.DEBT/100,s.minPay);due=D*(1+rd);pay=Math.min(due,budget);D=due-pay;left=Math.max(0,inc*pl.DEBT/100-pay);if(D<0.5){D=0;if(dfB==null)dfB=m}}
+  E*=1+rs;I*=1+ri;
+  lt=inc*pl.LTSS/100+left;ff=inc*pl.FFA/100;
+  need=Math.max(0,Et-E);toE=Math.min(lt,need);E+=toE;I+=lt-toE+ff;
+  if(emB==null&&E>=Et)emB=m;
+  B.push(E+I-D);
+ }
+ function first(arr,g){for(var i=0;i<arr.length;i++)if(arr[i]>=g)return i;return null}
+ return {A:A,B:B,dfA:dfA,dfB:dfB,emA:emA,emB:emB,gA:first(A,s.goal),gB:first(B,s.goal),Et:Et};
+}
+
+/* ---------- UI: input panel ---------- */
+var GROUPS=[
+ {t:'Thu nhập dự kiến',h:'Thu nhập của bạn không cố định, nên số này chỉ dùng khi sổ thu chưa đủ dữ liệu. Sau đó web tự tính trung bình 3 tháng từ các khoản bạn ghi.',f:[['income','Thu nhập dự kiến mỗi tháng','đ']]},
+ {t:'Chi thực tế mỗi hũ (tháng gần nhất)',h:'Hũ Tự do tài chính và Tiết kiệm dài hạn là số tiền bạn thực sự chuyển vào mỗi tháng.',f:JARS.map(function(j){return ['a.'+j.k,j.n,'đ',j]})},
+ 
+ {t:'Mục tiêu',f:[['goal','Mục tiêu tài sản ròng','đ'],['goalYears','Thời hạn đạt mục tiêu','năm','p']]}
+];
+function buildInputs(){
+ var h='<div class="note" id="note"></div>';
+ GROUPS.forEach(function(g){
+  h+='<section class="sec"><h2>'+g.t+'</h2>'+(g.h?'<p class="lead">'+g.h+'</p>':'')+'<div class="fields">';
+  g.f.forEach(function(f){
+   var isP=f[3]==='p',j=(f[3]&&f[3].k)?f[3]:null,v=getP(f[0]);
+   h+='<div class="field"><label for="f-'+f[0]+'">'+(j?'<span class="tag" style="background:var('+j.c+')">'+j.k+'</span>':'')+f[1]+'</label><div class="inp"><input id="f-'+f[0]+'" data-k="'+f[0]+'" data-t="'+(isP?'p':'n')+'" inputmode="'+(isP?'decimal':'numeric')+'" autocomplete="off" placeholder="0" value="'+(isP?(v?String(v).replace('.',','):''):(v?fmt(v):''))+'"><span>'+f[2]+'</span></div></div>';
+  });
+  h+='</div></section>';
+ });
+ h+='<section class="sec"><h2>Ví và nền tảng của bạn</h2><p class="lead">Tự nhập tên ví, hũ phụ trách, số dư hiện có và lãi suất mỗi năm. Web chỉ dùng đúng các số này để tính lãi, quỹ khẩn cấp và dự phóng.</p><div class="plats">';
+ S.plat.forEach(function(p,i){
+  h+='<div class="box pl" data-pi="'+i+'"><div class="fields"><div class="field"><label for="pl'+i+'n">Tên ví</label><div class="inp"><input id="pl'+i+'n" type="text" data-pf="name" autocomplete="off" value="'+esc(p.name).replace(/"/g,'&quot;')+'"></div></div>'
+   +'<div class="field"><label for="pl'+i+'j">Hũ phụ trách</label><div class="inp"><select id="pl'+i+'j" data-pf="jar">'+JARS.map(function(j){return '<option value="'+j.k+'"'+(j.k===p.jar?' selected':'')+'>'+j.n+'</option>'}).join('')+'</select></div></div>'
+   +'<div class="field"><label for="pl'+i+'b">Số dư hiện có</label><div class="inp"><input id="pl'+i+'b" data-pf="bal0" inputmode="numeric" autocomplete="off" placeholder="0" value="'+(p.bal0?fmt(p.bal0):'')+'"><span>đ</span></div></div>'
+   +'<div class="field"><label for="pl'+i+'r">Lãi suất</label><div class="inp"><input id="pl'+i+'r" data-pf="rate" inputmode="decimal" autocomplete="off" placeholder="0" value="'+(p.rate?String(p.rate).replace('.',','):'')+'"><span>%/năm</span></div></div><div class="field"><label for="pl'+i+'m">Kỳ hạn dự phóng</label><div class="inp"><input id="pl'+i+'m" data-pf="months" inputmode="numeric" autocomplete="off" placeholder="0" value="'+(p.months||'')+'"><span>tháng</span></div></div></div>'
+   +'<p class="fine" id="plres'+i+'"></p><div><button class="x" data-pdel>Xoá ví</button></div></div>';
+ });
+ h+='</div><div><button class="btn ghost" id="addplat">Thêm ví</button></div></section>';
+ h+='<div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" data-go="chan-doan">Xem chẩn đoán</button><button class="btn ghost" id="fromlog">Điền chi từng hũ từ Sổ thu</button><button class="btn ghost" id="reset">Đặt lại hồ sơ</button></div>';
+ $('#p-ho-so').innerHTML=h;
+ document.querySelectorAll('#p-ho-so [data-k]').forEach(function(el){
+  if(el.dataset.t!=='p')moneyize(el);
+  el.addEventListener('input',function(){
+   var v;
+   if(el.dataset.t==='p'){v=cleanDec(el)}
+   else{v=fmtKeep(el)}
+   setP(el.dataset.k,v);S.touched=true;save();render();
+  });
+ });
+ $('#reset').addEventListener('click',function(){var lg=S.log,sp=S.spend,db=S.debts,dpx=S.deposits,lnx=S.loans||[];S=clone(DEF);S.log=lg;S.spend=sp;S.debts=db;S.deposits=dpx;S.loans=lnx;S.touched=true;save();buildInputs();render()});
+ $('#fromlog').addEventListener('click',function(){
+  var cm=monthsAgo(0),a={};
+  JARS.forEach(function(j){a[j.k]=0});
+  S.log.forEach(function(e){if(mk(e.date)===cm){a.FFA+=(e.split&&e.split.FFA)||0;a.LTSS+=(e.split&&e.split.LTSS)||0}});
+  S.spend.forEach(function(e){if(!e.loanId&&mk(e.date)===cm&&a.hasOwnProperty(e.jar)&&e.jar!=='FFA'&&e.jar!=='LTSS')a[e.jar]+=e.amt});
+  S.a=a;S.touched=true;save();buildInputs();render();
+ });
+ $('#p-ho-so [data-go]').addEventListener('click',function(){go('chan-doan')});
+ document.querySelectorAll('#p-ho-so [data-pi]').forEach(function(box){
+  var i=parseInt(box.dataset.pi,10);
+  box.querySelectorAll('[data-pf]').forEach(function(el){
+   var f=el.dataset.pf;
+   if(f==='bal0')moneyize(el);
+   el.addEventListener(f==='jar'?'change':'input',function(){
+    var p=S.plat[i];
+    if(f==='name'||f==='jar')p[f]=el.value;
+    else if(f==='bal0'){p.bal0=fmtKeep(el)}
+    else if(f==='months'){var dm=el.value.replace(/\D/g,'');p.months=dm?parseInt(dm,10):0;el.value=dm?String(p.months):''}
+    else p.rate=cleanDec(el);
+    S.touched=true;save();render();
+   });
+  });
+  var del=box.querySelector('[data-pdel]');
+  del.addEventListener('click',function(){
+   if(!del.dataset.arm){del.dataset.arm='1';del.textContent='Xoá thật?';setTimeout(function(){if(del.isConnected){del.textContent='Xoá ví';delete del.dataset.arm}},3000);return}
+   S.plat.splice(i,1);S.touched=true;save();buildInputs();render();
+  });
+ });
+ $('#addplat').addEventListener('click',function(){S.plat.push({id:newId(),name:'Ví mới',jar:'LTSS',bal0:0,rate:0});S.touched=true;save();buildInputs();render();$('#p-ho-so [data-pi]:last-child')});
+}
+function renderNote(){
+ $('#note').innerHTML=S.touched?'<span>Dữ liệu lưu trên trình duyệt này và không gửi đi đâu.</span>':'<span>Chưa có số liệu. Nhập thu nhập dự kiến và ví của bạn ở đây, hoặc ghi khoản thu đầu tiên ở tab Sổ thu.</span>';
+}
+
+/* ---------- UI: diagnosis ---------- */
+function ring(score,col){
+ var r=54,c=2*Math.PI*r,d=c*score/100;
+ return '<svg class="ring" viewBox="0 0 132 132" role="img" aria-label="Điểm sức khoẻ tài chính '+score+' trên 100"><circle cx="66" cy="66" r="'+r+'" fill="none" stroke="var(--tint)" stroke-width="12"/><circle cx="66" cy="66" r="'+r+'" fill="none" stroke="var(--'+col+')" stroke-width="12" stroke-linecap="round" stroke-dasharray="'+d.toFixed(1)+' '+c.toFixed(1)+'" transform="rotate(-90 66 66)"/><text x="66" y="72" text-anchor="middle" font-size="34" font-weight="600">'+score+'</text><text x="66" y="92" text-anchor="middle" font-size="11" style="fill:var(--muted)">/ 100</text></svg>';
+}
+var CHIP={bad:'Xử lý ngay',warn:'Chú ý',good:'Tốt'};
+function renderDiag(R){
+ var el=$('#p-chan-doan');
+ if(!R.inc){el.innerHTML='<div class="empty">Nhập thu nhập ở tab Hồ sơ để bắt đầu phân tích.</div>';return}
+ var h='<section class="sec"><div class="hero">'+ring(R.score,R.grade[1])+'<div class="t"><div class="grade">'+R.grade[0]+'</div><p class="muted" style="font-size:14px">Điểm tổng hợp từ năm yếu tố: tiết kiệm, quỹ khẩn cấp, nợ, chi thiết yếu và kiểm soát dòng tiền.</p></div></div></section>';
+ h+='<section class="sec"><div class="stats">'
+  +'<div><b>'+sh(R.inc)+'</b><small>Thu nhập / tháng</small></div>'
+  +'<div><b>'+p1(R.sr)+'</b><small>Tiết kiệm + đầu tư</small></div>'
+  +'<div><b>'+p1(R.em)+' th</b><small>Quỹ khẩn cấp</small></div>'
+  +'<div><b>'+sh(S.invest+S.emergency-S.debt)+'</b><small>Tài sản ròng hiện tại</small></div></div></section>';
+ h+='<section class="sec"><h2>Điểm thành phần</h2><div class="comp">';
+ R.comps.forEach(function(c){h+='<div class="r"><span>'+c.n+'</span><div class="track"><i style="width:'+(c.v/c.max*100).toFixed(0)+'%"></i></div><span class="num muted">'+Math.round(c.v)+'/'+c.max+'</span></div>'});
+ h+='</div></section>';
+ h+='<section class="sec"><h2>Phát hiện chính</h2><div class="find">';
+ findings(S,R).forEach(function(f){h+='<div class="f"><span class="chip '+f.sev+'">'+CHIP[f.sev]+'</span><h3>'+f.t+'</h3><p>'+f.d+'</p></div>'});
+ h+='</div></section>';
+ h+='<section class="sec"><h2>Thực tế so với chuẩn 6 hũ</h2><div class="legend"><span><u></u>Mức chuẩn</span><span>Thanh màu là mức bạn đang chi</span></div><div class="jars">';
+ JARS.forEach(function(j){
+  var act=R.pct(j.k),dv=act-j.p,bad=(j.k==='NEC'||j.k==='PLAY')?dv>2:(j.k==='GIVE'?false:dv<-2),ok=(j.k==='NEC'||j.k==='PLAY')?dv<=0:(j.k==='GIVE'?true:dv>=0);
+  var cls=bad?'dn':ok?'up':'muted';
+  h+='<div class="jr"><span class="nm"><span class="tag" style="background:var('+j.c+')">'+j.k+'</span>'+j.n+'</span><div class="bar"><i style="width:'+Math.min(100,act/60*100).toFixed(1)+'%;background:var('+j.c+')"></i><u style="left:'+(j.p/60*100)+'%"></u></div><span class="v"><b>'+p1(act)+'</b><small class="'+cls+'">'+(dv>=0?'+':'−')+p1(Math.abs(dv)).replace('%','')+' điểm</small></span></div>';
+ });
+ var lk=R.leak/R.inc*100;
+ h+='<div class="jr"><span class="nm muted">Chưa gán hũ</span><div class="bar"><i style="width:'+Math.min(100,Math.max(0,lk)/60*100).toFixed(1)+'%;background:var(--line-a)"></i></div><span class="v"><b>'+p1(lk)+'</b><small class="'+(lk>5||lk<0?'dn':'muted')+'">'+vnd(R.leak)+'</small></span></div>';
+ h+='</div></section>';
+ el.innerHTML=h;
+}
+
+/* ---------- UI: strategy ---------- */
+function renderStrat(R,P1,P2,sm){
+ var el=$('#p-chien-luoc');
+ if(!R.inc){el.innerHTML='<div class="empty">Nhập thu nhập ở tab Hồ sơ để nhận chiến lược.</div>';return}
+ var a=S.a,inc=R.inc;
+ var st=[
+  {t:'Đệm 1 tháng chi thiết yếu',d:'Tách riêng '+vnd(a.NEC)+' vào ví tiết kiệm. Đây là mức tối thiểu để một biến cố nhỏ không biến thành nợ mới.',done:R.em>=1,eta:R.em>=1?'Đã xong':''},
+  {t:'Trả hết nợ lãi cao',d:S.debt>0?('Dư nợ '+vnd(S.debt)+', lãi '+S.debtRate+'%/năm. Dùng toàn bộ '+vnd(inc*P1.DEBT/100)+' mỗi tháng cho khoản này.'):'Bạn không có nợ. Giữ nguyên, không vay tiêu dùng.',done:!R.hi,eta:S.debt>0?(sm.dfB!=null?'~'+mo(sm.dfB):''):'Đã xong'},
+  {t:'Quỹ khẩn cấp 3 đến 6 tháng',d:'Mục tiêu '+vnd(6*inc*P1.NEC/100)+' (6 tháng chi thiết yếu theo kế hoạch). Nạp qua ví tiết kiệm riêng.',done:R.em>=6,eta:R.em>=6?'Đã xong':(sm.emB!=null?'~'+mo(sm.emB):'')},
+  {t:'Đầu tư đều đặn vào hũ Tự do tài chính',d:'Chuyển cố định mỗi tháng, không canh thị trường. Phần tiết kiệm vượt quỹ khẩn cấp cũng chảy sang đây.',done:false,eta:'Hằng tháng'},
+  {t:'Tăng thu nhập bằng hũ Phát triển',d:'Mỗi đồng thu nhập tăng thêm đi qua đúng 6 hũ. Đây là đòn bẩy lớn nhất về dài hạn.',done:false,eta:'Liên tục'}
+ ];
+ var cur=-1;for(var i=0;i<3;i++){if(!st[i].done){cur=i;break}}if(cur<0)cur=3;
+ var vt=['Lấp lỗ hổng đầu tiên: dựng đệm '+vnd(a.NEC)+' trước mọi việc khác.','Đánh nợ lãi '+S.debtRate+'%/năm bằng '+vnd(inc*P1.DEBT/100)+' mỗi tháng. Dự kiến hết nợ sau '+mo(sm.dfB)+'.','Nạp quỹ khẩn cấp đến '+vnd(sm.Et)+'. Dự kiến đủ sau '+mo(sm.emB)+'.','Nền móng đã vững. Tự động hoá '+vnd(inc*P1.FFA/100)+' mỗi tháng vào đầu tư dài hạn và giữ kỷ luật.'][cur];
+ var h='<section class="sec"><div class="verdict"><small>Ưu tiên của bạn lúc này</small><p>'+vt+'</p></div></section>';
+ var spend=inc*(P1.NEC+P1.PLAY+P1.EDU+P1.GIVE)/100,save=inc*(P1.FFA+P1.LTSS+P1.DEBT)/100;
+ h+='<section class="sec"><div class="golden"><span>Công thức vàng</span><b>'+vnd(inc)+'</b><span>−</span><b>'+vnd(save)+'</b><span>tự động chuyển đi</span><span>=</span><b>'+vnd(spend)+'</b><span>chi cho phép</span></div></section>';
+ h+='<section class="sec"><h2>Lộ trình theo thứ tự ưu tiên</h2><p class="lead">Mỗi bước mở ra khi bước trước đủ vững. Mô hình 6 hũ giữ nguyên khung, tỷ lệ chỉ lệch khi hoàn cảnh của bạn đòi hỏi.</p><ol class="stages">';
+ st.forEach(function(s,i){h+='<li class="stage '+(s.done?'done':i===cur?'cur':'')+'"><span class="n">'+(s.done?'✓':(i+1))+'</span><h3>'+s.t+'</h3><span class="eta">'+(s.eta||'')+'</span><p>'+s.d+'</p></li>'});
+ h+='</ol></section>';
+ var diff=S.debt>0||JSON.stringify(P1)!==JSON.stringify(P2);
+ h+='<section class="sec"><h2>Phân bổ tối ưu mỗi tháng</h2><div class="tw"><table><thead><tr><th>Hũ</th><th>Hiện tại</th><th>Tối ưu</th>'+(diff?'<th>Giai đoạn sau</th>':'')+'<th>Số tiền</th><th>Thay đổi</th><th class="w">Ví nhận</th></tr></thead><tbody>';
+ var rows=JARS.map(function(j){return {k:j.k,n:j.n,c:j.c,w:j.w,cur:R.pct(j.k)}});
+ if(S.debt>0)rows.splice(1,0,{k:'DEBT',n:'Trả nợ',c:'--c-debt',w:WALLET_DEBT,cur:inc?S.minPay/inc*100:0});
+ rows.forEach(function(r){
+  var amt=inc*P1[r.k]/100,curAmt=r.k==='DEBT'?S.minPay:a[r.k],d=amt-curAmt;
+  h+='<tr><td><span class="tag" style="background:var('+r.c+')">'+r.k+'</span>'+r.n+'</td><td>'+p1(r.cur)+'</td><td><b>'+p1(P1[r.k])+'</b></td>'+(diff?'<td>'+p1(P2[r.k]||0)+'</td>':'')+'<td>'+sh(amt)+'</td><td class="'+(Math.abs(d)<1000?'muted':(r.k==='NEC'||r.k==='PLAY'||r.k==='GIVE'?(d<0?'up':'dn'):(d>0?'up':'dn')))+'">'+(d>=0?'+':'')+sh(d)+'</td><td class="w">'+r.w+'</td></tr>';
+ });
+ h+='</tbody></table></div>';
+ if(P1.short>0)h+='<p class="fine">Ngân sách đang quá căng: còn thiếu khoảng '+P1.short+'% thu nhập sau khi cắt hết mức có thể. Cần giảm chi thiết yếu hoặc tăng thu nhập, nếu không lộ trình sẽ chậm hơn dự kiến.</p>';
+ h+='</section>';
+ h+='<section class="sec"><h2>Lệnh chuyển ngày lương về</h2><p class="lead">Thiết lập một lần, để ngân hàng làm thay ý chí. Tiền về ví nhận tiền rồi chia ngay:</p><div class="flow">';
+ var order=['DEBT','LTSS','FFA','GIVE','PLAY','EDU','NEC'];
+ order.forEach(function(k){
+  if(k==='DEBT'&&!(S.debt>0))return;
+  var amt=inc*P1[k]/100;if(amt<=0)return;
+  var jj=k==='DEBT'?{n:'Trả nợ',w:WALLET_DEBT}:jar(k),to='→ '+jj.w;
+  h+='<div class="s"><span>'+jj.n+'</span><b>'+vnd(amt)+'</b><small>'+to+'</small></div>';
+ });
+ h+='</div></section>';
+ var acts=[];
+ if(R.em<1)acts.push('Mở ví tiết kiệm riêng và chuyển đợt đầu '+vnd(Math.min(a.NEC,Math.round(inc*0.1)))+' trong tuần này.');
+ if(R.hi)acts.push('Gọi ngân hàng hỏi gói đảo nợ hoặc chuyển dư nợ sang khoản lãi thấp hơn, đồng thời đặt lệnh trả '+vnd(inc*P1.DEBT/100)+'/tháng.');
+ if(R.leak>0&&R.leak/inc>0.03)acts.push('Ghi lại 30 ngày chi tiêu để tìm '+vnd(R.leak)+' đang không thuộc hũ nào.');
+ if(R.inc&&R.necPct>55)acts.push('Rà soát 3 khoản thiết yếu lớn nhất và các gói đăng ký tự gia hạn, mục tiêu giảm '+vnd(Math.max(0,a.NEC-inc*P1.NEC/100))+'/tháng.');
+ acts.push('Cài lệnh chuyển tự động vào ngày lương về theo bảng trên.');
+ h+='<section class="sec"><h2>Việc nên làm trong 7 ngày</h2><ul class="acts">'+acts.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul></section>';
+ var PR=[
+  ['Lãi suất nợ là lợi suất chắc chắn nhất','Trả khoản nợ lãi từ 12%/năm trở lên trước khi đầu tư. Không kênh an toàn nào cho bạn 18%/năm đều đặn, còn trả nợ thì có.'],
+  ['Đệm trước, đầu tư sau','Đủ 3 tháng chi thiết yếu thì mới tăng hũ Tự do tài chính. Đủ 6 tháng thì chuyển phần tiết kiệm mới sang đầu tư để tiền không nằm yên.'],
+  ['Đảo ngược công thức','Thu nhập trừ tiết kiệm tự động bằng chi tiêu cho phép. Chuyển tiền đi trước khi kịp tiêu, đừng đợi cuối tháng xem còn dư bao nhiêu.'],
+  ['Cắt Hưởng thụ trước, giữ Phát triển','Kỹ năng làm thu nhập tăng, còn cà phê thì không. Nhưng Hưởng thụ không về 0, giữ ít nhất 5% để kế hoạch còn bền sau vài tháng.'],
+  ['Thu nhập không đều thì tự trả lương cho mình','Mọi khoản tiền vào đều được chia hũ ngay. Hũ Thiết yếu đóng vai quỹ lương: mỗi tháng bạn chỉ rút một mức cố định, tháng nhiều tiền hũ dày thêm, tháng ít tiền vẫn đủ chi.'],
+  ['Mỗi ví một nhiệm vụ','Ví chi tiêu lặt vặt không chứa tiền tiết kiệm, ví tiết kiệm không gắn thẻ thanh toán. Khi tiền bị tách, ý định không bị ví dụ "tiện tay" phá vỡ.'],
+  ['Phân biệt Cần và Muốn','Với khoản muốn lớn hơn 5% thu nhập, chờ 24 giờ rồi mới trả. Nếu vẫn muốn, hãy lấy từ hũ Hưởng thụ, đừng lấy từ hũ khác.']
+ ];
+ h+='<section class="sec"><h2>Tư duy đằng sau chiến lược</h2><div class="princ">'+PR.map(function(p){return '<details><summary>'+p[0]+'</summary><p>'+p[1]+'</p></details>'}).join('')+'</div></section>';
+ var ck=chkLoad();
+ var CK=[['Trích lập tự động','Chia tiền vào các hũ ngay khi lương về.'],['Khoá hũ Tự do tài chính','Chuyển sang khoản riêng, không có thẻ thanh toán.'],['Tiêu hết hũ Hưởng thụ','Dùng trọn '+vnd(inc*P1.PLAY/100)+' để không có cảm giác bị thiếu thốn.'],['Review cuối tháng','Xem lại hũ Thiết yếu và chỉnh số tháng sau.']];
+ h+='<section class="sec"><h2>Checklist đầu và cuối tháng</h2><div class="chk">'+CK.map(function(c,i){return '<label><input type="checkbox" data-ck="'+i+'"'+(ck[i]?' checked':'')+'><div><b>'+c[0]+'</b><span>'+c[1]+'</span></div></label>'}).join('')+'</div></section>';
+ el.innerHTML=h;
+ el.querySelectorAll('[data-ck]').forEach(function(b){b.addEventListener('change',function(){var c=chkLoad();c[b.dataset.ck]=b.checked;chkSave(c)})});
+}
+function ckKey(){var d=new Date();return 'qtc.chk.'+d.getFullYear()+'-'+(d.getMonth()+1)}
+function chkLoad(){try{return JSON.parse(localStorage.getItem(ckKey()))||{}}catch(e){return {}}}
+function chkSave(c){try{localStorage.setItem(ckKey(),JSON.stringify(c))}catch(e){}}
+
+/* ---------- UI: projection ---------- */
+function niceStep(x){var p=Math.pow(10,Math.floor(Math.log10(x))),f=x/p;return (f<=1?1:f<=2?2:f<=2.5?2.5:f<=5?5:10)*p}
+function chart(sm,n,goal,showGoalLine){
+ var W=420,H=300,L=46,Rr=16,T=20,Bm=30,A=sm.A.slice(0,n+1),B=sm.B.slice(0,n+1);
+ var ymax=Math.max.apply(null,A.concat(B)),ymin=Math.min.apply(null,A.concat(B).concat([0]));
+ var gIn=showGoalLine&&goal>0&&goal<=ymax*1.6;if(gIn)ymax=Math.max(ymax,goal);
+ if(ymax<=ymin)ymax=ymin+1;
+ var step=niceStep((ymax-ymin)/4);ymin=Math.floor(ymin/step)*step;ymax=Math.ceil(ymax/step)*step;
+ function X(m){return L+(W-L-Rr)*m/n}
+ function Y(v){return T+(H-T-Bm)*(1-(v-ymin)/(ymax-ymin))}
+ var g='',v;
+ for(v=ymin;v<=ymax+step/2;v+=step){g+='<line class="grid" x1="'+L+'" x2="'+(W-Rr)+'" y1="'+Y(v).toFixed(1)+'" y2="'+Y(v).toFixed(1)+'"/><text x="'+(L-6)+'" y="'+(Y(v)+4).toFixed(1)+'" text-anchor="end">'+sh(v)+'</text>'}
+ var yrs=n/12,xs=yrs<=5?1:yrs<=10?2:5;
+ for(var y=0;y<=yrs;y+=xs){g+='<text x="'+X(y*12).toFixed(1)+'" y="'+(H-12)+'" text-anchor="middle">'+(y===0?'Nay':y+' năm')+'</text>'}
+ function path(arr){var s='';for(var i=0;i<arr.length;i++)s+=(i?'L':'M')+X(i).toFixed(1)+' '+Y(arr[i]).toFixed(1);return s}
+ var base=Y(Math.max(ymin,0));
+ g+='<path class="ar" d="'+path(B)+'L'+X(n).toFixed(1)+' '+base.toFixed(1)+'L'+X(0).toFixed(1)+' '+base.toFixed(1)+'Z"/>';
+ if(gIn)g+='<line class="gl" x1="'+L+'" x2="'+(W-Rr)+'" y1="'+Y(goal).toFixed(1)+'" y2="'+Y(goal).toFixed(1)+'"/><text x="'+(L+6)+'" y="'+(Y(goal)-6).toFixed(1)+'" style="fill:var(--gold);font-weight:600">Mục tiêu '+sh(goal)+'</text>';
+ g+='<path class="la" d="'+path(A)+'"/><path class="lb" d="'+path(B)+'"/>';
+ var yb=Y(B[n]),ya=Y(A[n]),la=ya<=yb?ya-9:ya+16,lb=ya<=yb?yb+16:yb-9;
+ g+='<circle class="dot" cx="'+X(n)+'" cy="'+yb.toFixed(1)+'" r="4.5"/><text class="lab" x="'+(W-Rr)+'" y="'+lb.toFixed(1)+'" text-anchor="end">'+sh(B[n])+'</text>';
+ g+='<text x="'+(W-Rr)+'" y="'+la.toFixed(1)+'" text-anchor="end">'+sh(A[n])+'</text>';
+ if(sm.dfB!=null&&sm.dfB>0&&sm.dfB<=n)g+='<circle class="dotg" cx="'+X(sm.dfB).toFixed(1)+'" cy="'+Y(B[sm.dfB]).toFixed(1)+'" r="4.5"/><text x="'+(X(sm.dfB)+8).toFixed(1)+'" y="'+(Y(B[sm.dfB])+16).toFixed(1)+'" style="fill:var(--gold);font-weight:600">Hết nợ · tháng '+sm.dfB+'</text>';
+ return '<svg class="ch" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Tài sản ròng theo thời gian: chiến lược tối ưu so với giữ nguyên">'+g+'</svg>';
+}
+function renderProj(R,P1,P2,sm){
+ var el=$('#pj-dyn');
+ if(!R.inc){el.innerHTML='<div class="empty">Nhập thu nhập ở tab Hồ sơ hoặc ghi khoản thu đầu tiên để xem dự phóng dài hạn.</div>';return}
+ var n=S.h*12,a=S.a;
+ var h='<section class="sec"><h2>Tài sản ròng theo thời gian</h2><p class="lead">Tài sản ròng gồm tiết kiệm cộng đầu tư trừ nợ. Hai kịch bản dùng cùng thu nhập và cùng lãi suất.</p><div class="seg" role="group" aria-label="Khoảng thời gian">'+[5,10,15,20].map(function(y){return '<button data-h="'+y+'" aria-pressed="'+(S.h===y)+'">'+y+' năm</button>'}).join('')+'</div>';
+ h+='<div class="chartbox">'+chart(sm,n,S.goal,true)+'<div class="key"><span><i class="a"></i>Giữ nguyên thói quen</span><span><i></i>Chiến lược tối ưu</span></div></div></section>';
+ var wA=a.FFA+a.LTSS,wB=R.inc*(P1.FFA+P1.LTSS+P1.DEBT)/100;
+ var A=sm.A[n],B=sm.B[n],best=B>=A;
+ h+='<section class="sec"><h2>So sánh sau '+S.h+' năm</h2><div class="tw cmp"><table><thead><tr><th>Chỉ số</th><th>Giữ nguyên</th><th>Tối ưu</th></tr></thead><tbody>'
+  +'<tr><td>Tài sản ròng</td><td>'+sh(A)+'</td><td class="'+(best?'best':'')+'">'+sh(B)+'</td></tr>'
+  +'<tr><td>Chênh lệch</td><td class="muted">–</td><td class="'+(best?'best':'dn')+'">'+(B-A>=0?'+':'')+sh(B-A)+'</td></tr>'
+  +'<tr><td>Hết nợ sau</td><td>'+(S.debt>0?mo(sm.dfA):'Không nợ')+'</td><td>'+(S.debt>0?mo(sm.dfB):'Không nợ')+'</td></tr>'
+  +'<tr><td>Quỹ khẩn cấp đủ 6 tháng</td><td>'+mo(sm.emA)+'</td><td>'+mo(sm.emB)+'</td></tr>'
+  +(S.goal>0?'<tr><td>Chạm mục tiêu '+sh(S.goal)+'</td><td>'+mo(sm.gA)+'</td><td>'+mo(sm.gB)+'</td></tr>':'')
+  +'<tr><td>Để dành mỗi tháng (đầu kỳ)</td><td>'+sh(wA)+'</td><td>'+sh(wB)+'</td></tr>'
+  +'</tbody></table></div></section>';
+ var r=S.rInv/1200,nn=Math.max(1,Math.round(S.goalYears*12)),w0=S.emergency+S.invest-S.debt,pm;
+ if(r>0){var g=Math.pow(1+r,nn);pm=Math.max(0,(S.goal-w0*g)*r/(g-1))}else pm=Math.max(0,(S.goal-w0)/nn);
+ var okay=wB>=pm;
+ h+=(S.goal>0&&S.goalYears>0)?'<section class="sec"><h2>Mục tiêu '+sh(S.goal)+' trong '+S.goalYears+' năm</h2><p style="font-size:14.5px">Với lợi suất '+p1(S.rInv)+'/năm, bạn cần để dành khoảng <b class="num">'+vnd(pm)+'</b> mỗi tháng. Kế hoạch tối ưu dành ra <b class="num">'+vnd(wB)+'</b>, '+(okay?'<span class="up">đủ để đạt mục tiêu</span>':'<span class="dn">còn thiếu '+vnd(pm-wB)+' mỗi tháng</span>')+'. '+(okay?'':'Có hai đòn bẩy: tăng thu nhập hoặc kéo dài thời hạn.')+'</p></section>':'<section class="sec"><p class="fine">Nhập mục tiêu và thời hạn ở tab Hồ sơ để xem cần để dành bao nhiêu mỗi tháng.</p></section>';
+ h+='<section class="sec"><p class="fine">Mô phỏng dùng lãi suất cố định, không tính lạm phát, thuế, phí hay biến động thị trường. Ở kịch bản giữ nguyên, khoản trả nợ sau khi hết nợ được coi là chi tiêu. Kết quả để tham khảo và lập kế hoạch, không phải tư vấn đầu tư.</p></section>';
+ el.innerHTML=h;
+ el.querySelectorAll('[data-h]').forEach(function(b){b.addEventListener('click',function(){S.h=parseInt(b.dataset.h,10);save();render()})});
+}
+
+/* ---------- sổ thu, số dư hũ và sổ nợ ---------- */
+var KEYS=['NEC','FFA','LTSS','EDU','PLAY','GIVE','DEBT'];
+function todayStr(){var d=new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
+var Q={amt:0,note:'',date:todayStr(),split:{},edited:false};
+function mk(d){return String(d).slice(0,7)}
+function monthsAgo(n){var d=new Date();d.setDate(1);d.setMonth(d.getMonth()-n);return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)}
+function sumIn(s,m){return s.log.filter(function(e){return mk(e.date)===m}).reduce(function(t,e){return t+e.amt},0)}
+function cntIn(s,m){return s.log.filter(function(e){return e.kind!=='alloc'&&mk(e.date)===m}).length}
+function incStats(s){
+ var cm=monthsAgo(0),cur=sumIn(s,cm),done=[],i;
+ if(!s.log.length)return {has:false,auto:false,base:s.income,cur:0,done:[],avg:0,cv:0,min:null};
+ var first=s.log.map(function(e){return mk(e.date)}).sort()[0];
+ for(i=1;i<=6;i++){var m=monthsAgo(i);if(m<first)break;done.push(sumIn(s,m))}
+ var d3=done.slice(0,3),avg=d3.length?d3.reduce(function(a,b){return a+b},0)/d3.length:0,cv=0;
+ if(done.length>=2){var mean=done.reduce(function(a,b){return a+b},0)/done.length,sd=Math.sqrt(done.reduce(function(t,x){return t+(x-mean)*(x-mean)},0)/done.length);cv=mean?sd/mean:0}
+ return {has:true,auto:d3.length>0,base:d3.length?Math.round(avg):Math.max(cur,s.income),cur:cur,done:done,avg:avg,cv:cv,min:done.length?Math.min.apply(null,done):null};
+}
+function loanOut(l){return Math.max(0,l.amt-(l.rec||0))}
+function loanInfo(l){var e=earn(l.amt,l.rate||0,l.months||0,'simple'),due=l.months>0?addM(l.date,l.months):'';return {out:loanOut(l),int:e.int,intLeft:Math.max(0,e.int-(l.intRec||0)),due:due}}
+function loanAgg(s){var o=0,i=0,n=0;(s.loans||[]).forEach(function(l){var f=loanInfo(l);if(f.out>0){o+=f.out;i+=f.intLeft;n++}});return {out:o,int:i,n:n}}
+function delLoan(id){S.loans=S.loans.filter(function(l){return l.id!==id});S.spend=S.spend.filter(function(e){return e.loanId!==id});S.log=S.log.filter(function(e){return e.loanId!==id})}
+function debtAgg(s){var D=0,w=0,mn=0;(s.debts||[]).forEach(function(d){if(d.bal>0){D+=d.bal;w+=d.bal*d.rate;mn+=d.min}});return {debt:D,rate:D?w/D:0,min:mn}}
+function balances(s){var b={};KEYS.forEach(function(k){b[k]=0});
+ s.log.forEach(function(e){KEYS.forEach(function(k){b[k]+=(e.split&&e.split[k])||0})});
+ (s.plat||[]).forEach(function(p){if(b.hasOwnProperty(p.jar))b[p.jar]+=p.bal0});
+ s.spend.forEach(function(e){b[e.jar]-=e.amt});return b}
+function walletOf(s,k){var n=(s.plat||[]).filter(function(p){return p.jar===k}).map(function(p){return p.name});return n.length?n.join(' + '):'Chưa gán ví (thêm ở tab Hồ sơ)'}
+function jarRate(s,k){var ps=(s.plat||[]).filter(function(p){return p.jar===k});if(!ps.length)return 0;var t=0,w=0;ps.forEach(function(p){t+=p.rate*p.bal0;w+=p.bal0});return w>0?t/w:ps.reduce(function(a,p){return a+p.rate},0)/ps.length}
+function walletBal(s,b){var out={};JARS.forEach(function(j){var ps=s.plat.filter(function(p){return p.jar===j.k});if(!ps.length)return;var open=ps.reduce(function(t,p){return t+p.bal0},0),delta=b[j.k]-open;ps.forEach(function(p){out[p.id]=p.bal0+delta*(open>0?p.bal0/open:1/ps.length)})});return out}
+function earn(bal,rate,months,mode){
+ if(!(bal>0)||!(months>0))return {int:0,total:bal>0?bal:0,rows:[]};
+ var r=rate/1200,b=bal,rows=[],i,it;
+ for(i=1;i<=months;i++){if(mode==='comp'){it=b*r;b+=it}else{it=bal*r;b=bal+bal*r*i}rows.push({m:i,it:it,b:b})}
+ return {int:b-bal,total:b,rows:rows};
+}
+var SCid='';
+function buildProj(){$('#p-du-phong').innerHTML='<section class="sec" id="pj-wal"></section><div id="pj-dyn"></div>'}
+function renderWal(real,bal){
+ var el=$('#pj-wal'),wb=walletBal(real,bal),mode=real.mode,h='<h2>Dự phóng lãi từng ví</h2><p class="lead">Số dư mỗi ví là số bạn nhập ở tab Hồ sơ cộng các khoản đã xác nhận chia ở Sổ thu. Lãi suất và kỳ hạn cũng do bạn nhập ở đó.</p>';
+ h+='<div class="seg" role="group" aria-label="Cách tính lãi"><button data-mode="simple" aria-pressed="'+(mode==='simple')+'">Lãi đơn</button><button data-mode="comp" aria-pressed="'+(mode==='comp')+'">Nhập gốc hàng tháng</button></div>';
+ var rows='',tb=0,ti=0,tt=0,any=false;
+ real.plat.forEach(function(p){
+  var b=Math.max(0,wb[p.id]||0),e=earn(b,p.rate,p.months||0,mode);
+  if(!(b>0))return;any=true;tb+=b;ti+=e.int;tt+=e.total;
+  rows+='<tr><td>'+esc(p.name)+'<br><small class="muted">'+(p.rate?p1(p.rate)+'/năm':'chưa nhập lãi')+' · '+(p.months?p.months+' tháng':'chưa nhập kỳ hạn')+'</small></td><td>'+vnd(b)+'</td><td>'+vnd(e.int)+'</td><td><b>'+vnd(e.total)+'</b></td></tr>';
+ });
+ if(!any)h+='<p class="muted" style="font-size:14px">Chưa có ví nào có số dư. Nhập số dư, lãi suất và kỳ hạn ở tab Hồ sơ để xem dự phóng.</p>';
+ else{h+='<div class="tw cmp"><table><thead><tr><th>Ví</th><th>Số dư</th><th>Lãi nhận</th><th>Tổng nhận về</th></tr></thead><tbody>'+rows+'<tr><td><b>Tổng cộng</b></td><td><b>'+vnd(tb)+'</b></td><td><b>'+vnd(ti)+'</b></td><td><b>'+vnd(tt)+'</b></td></tr></tbody></table></div>';
+  h+='<p class="fine">'+(mode==='simple'?'Lãi đơn: lãi = số dư × lãi suất × số tháng ÷ 12, nhận khi đáo hạn.':'Nhập gốc hàng tháng: mỗi tháng lãi = số dư hiện tại × lãi suất ÷ 12, rồi cộng vào gốc.')+' Không tính thuế, phí hay rút giữa kỳ.</p>';
+  var opts=real.plat.filter(function(p){return (wb[p.id]||0)>0&&p.months>0}).map(function(p){return '<option value="'+p.id+'"'+(p.id===SCid?' selected':'')+'>'+esc(p.name)+'</option>'}).join('');
+  if(opts){var pp=real.plat.filter(function(p){return p.id===(SCid||'')})[0]||real.plat.filter(function(p){return (wb[p.id]||0)>0&&p.months>0})[0];
+   var sc=earn(Math.max(0,wb[pp.id]||0),pp.rate,pp.months,mode),sr='';
+   sc.rows.slice(0,36).forEach(function(r){sr+='<tr><td>'+r.m+'</td><td>'+vnd(r.it)+'</td><td>'+vnd(r.b)+'</td></tr>'});
+   h+='<h3 style="margin-top:6px">Từng tháng</h3><div class="inp" style="max-width:320px"><select id="sc-plat" aria-label="Chọn ví">'+opts+'</select></div><div class="tw cmp"><table><thead><tr><th>Tháng</th><th>Lãi tháng</th><th>Số dư</th></tr></thead><tbody>'+sr+'</tbody></table></div>'+(sc.rows.length>36?'<p class="fine">Chỉ hiện 36 tháng đầu.</p>':'');
+  }}
+ el.innerHTML=h;
+ el.querySelectorAll('[data-mode]').forEach(function(b){b.addEventListener('click',function(){S.mode=b.dataset.mode;save();render()})});
+ var sp=$('#sc-plat');if(sp)sp.addEventListener('change',function(){SCid=sp.value;renderWal(real,bal)});
+}
+function syncPlat(real,bal){
+ var wb=walletBal(real,bal);
+ real.plat.forEach(function(p,i){var el=$('#plres'+i);if(!el)return;
+  var b=Math.max(0,wb[p.id]||0),t;
+  if(!(b>0))t='Nhập số dư để xem dự phóng.';
+  else if(!(p.months>0))t='Số dư tính lãi '+vnd(b)+'. Nhập kỳ hạn để xem lãi.';
+  else{var e=earn(b,p.rate,p.months,real.mode);t='Số dư tính lãi '+vnd(b)+'. Sau '+p.months+' tháng: lãi '+vnd(e.int)+', tổng '+vnd(e.total)+(real.mode==='simple'?' (lãi đơn).':' (nhập gốc hàng tháng).')}
+  el.textContent=t});
+}
+function eff(s,b){
+ var v=clone(s),st=incStats(s),da=debtAgg(s);
+ v.income=st.base;v.other=0;v.cv=st.cv;v.nDone=st.done.length;v.irregular=st.done.length>=2?st.cv>0.25:true;
+ v.emergency=Math.max(0,b.LTSS);v.invest=Math.max(0,b.FFA);v.rSave=jarRate(s,'LTSS');v.rInv=jarRate(s,'FFA');
+ v.debt=da.debt;v.debtRate=da.rate;v.minPay=da.min;return v;
+}
+function splitAmt(amt,P){
+ var w={},tot=0,out={},used=0,big=null;
+ KEYS.forEach(function(k){var v=P[k]||0;w[k]=v;tot+=v;if(v&&(big==null||v>w[big]))big=k});
+ KEYS.forEach(function(k){out[k]=tot?Math.floor(amt*w[k]/tot):0;used+=out[k]});
+ if(big)out[big]+=amt-used;
+ return out;
+}
+function digitsOf(el){return el.value.replace(/\D/g,'').slice(0,13)}
+function hintFor(el,v){var fd=el.closest('.field');if(!fd)return;var h=fd.querySelector('.hint');if(!h){h=document.createElement('div');h.className='hint';fd.appendChild(h)}h.textContent=v>0?fmt(v)+' đ':''}
+function hintOf(el){
+ var d=el.value.replace(/\D/g,''),v=d?parseInt(d.slice(0,13),10):0,mh=el.parentNode.querySelector('.mh');
+ if(!mh){mh=document.createElement('em');mh.className='mh';el.insertAdjacentElement('afterend',mh)}
+ mh.textContent=v>=1000?'≈ '+sh(v):''}
+function updHints(){document.querySelectorAll('input[inputmode="numeric"]').forEach(hintOf)}
+function fmtKeep(el){
+ var d=el.value.replace(/\D/g,'');
+ if(d.length>13){d=d.slice(0,13);el.value=d}
+ hintOf(el);
+ return d?parseInt(d,10):0}
+document.addEventListener('focusout',function(e){var el=e.target;
+ if(el&&el.tagName==='INPUT'&&el.getAttribute('inputmode')==='numeric'){var d=el.value.replace(/\D/g,'').slice(0,13);if(d)el.value=fmt(parseInt(d,10));hintOf(el)}});
+function moneyize(el){hintOf(el)}
+function cleanDec(el){var c=el.value.replace(/[^0-9,.]/g,'');if(c!==el.value)el.value=c;return parseFloat(c.replace(',','.'))||0}
+function bindMoney(el,cb){moneyize(el);el.addEventListener('input',function(){cb(fmtKeep(el))})}
+function jname(k){return k==='DEBT'?'Trả nợ':jar(k).n}
+function jwallet(k){return k==='DEBT'?WALLET_DEBT:jar(k).w}
+function jcol(k){return k==='DEBT'?'--c-debt':jar(k).c}
+function dd(d){return String(d).slice(8)+'/'+String(d).slice(5,7)}
+function newId(){return String(Date.now())+Math.floor(Math.random()*1000)}
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function numOf(id){return parseInt($(id).value.replace(/\D/g,''),10)||0}
+
+function buildLedger(){
+ var opts=JARS.map(function(j){return '<option value="'+j.k+'">'+j.n+'</option>'}).join('');
+ var h='<section class="sec"><h2>Ghi một khoản thu</h2><p class="lead">Mỗi lần có tiền vào, ghi riêng từng khoản. Web chỉ gợi ý cách chia theo kế hoạch hiện tại. Bạn sửa số tiền từng hũ rồi bấm xác nhận thì mới ghi vào số dư.</p>'
+ +'<div class="fields"><div class="field"><label for="q-amt">Số tiền</label><div class="inp big"><input id="q-amt" inputmode="numeric" autocomplete="off" placeholder="0"><span>đ</span></div></div>'
+ +'<div class="field"><label for="q-note">Nguồn (tuỳ chọn)</label><div class="inp"><input id="q-note" type="text" list="srcs" autocomplete="off" placeholder="Dự án, thưởng, bán đồ"><datalist id="srcs"><option value="Dự án"><option value="Freelance"><option value="Thưởng"><option value="Hoa hồng"><option value="Bán đồ"><option value="Khác"></datalist></div></div>'
+ +'<div class="field"><label for="q-date">Ngày nhận</label><div class="inp"><input id="q-date" type="date"></div></div></div>'
+ +'<div id="pv"></div><p class="fine" id="pv-rem" aria-live="polite"></p>'
+ +'<div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="q-add" disabled>Xác nhận chia vào hũ</button><button class="btn ghost" id="q-reset">Về gợi ý</button></div><p class="fine" id="q-msg" aria-live="polite"></p></section>'
+ +'<section class="sec" id="bal"></section>'
+ +'<section class="sec" id="poolsec" hidden><h2>Phân bổ phần chưa chia</h2><div class="fields"><div class="field"><label for="pool-jar">Vào hũ</label><div class="inp"><select id="pool-jar">'+opts+'</select></div></div><div class="field"><label for="pool-amt">Số tiền</label><div class="inp"><input id="pool-amt" inputmode="numeric" autocomplete="off" placeholder="0"><span>đ</span></div></div></div><div><button class="btn" id="pool-add">Xác nhận phân bổ</button></div><p class="fine" id="pool-msg" aria-live="polite"></p></section>'
+ +'<section class="sec"><h2>Ghi một khoản chi từ hũ</h2><div class="fields"><div class="field"><label for="s-jar">Chi từ hũ</label><div class="inp"><select id="s-jar">'+opts+'</select></div></div>'
+ +'<div class="field"><label for="s-amt">Số tiền</label><div class="inp"><input id="s-amt" inputmode="numeric" autocomplete="off" placeholder="0"><span>đ</span></div></div>'
+ +'<div class="field"><label for="s-note">Ghi chú (tuỳ chọn)</label><div class="inp"><input id="s-note" type="text" autocomplete="off"></div></div></div>'
+ +'<div><button class="btn" id="s-add">Ghi khoản chi</button></div><p class="fine" id="s-msg" aria-live="polite"></p></section>'
+ +'<section class="sec"><h2>Sổ nợ và cho vay</h2><div id="debtlist"></div>'
+ +'<div class="princ"><details id="dt-add"><summary>Ghi nợ mới</summary><div class="fields" style="padding-bottom:12px">'
+ +'<div class="field"><label for="d-name">Tên khoản nợ</label><div class="inp"><input id="d-name" type="text" autocomplete="off" placeholder="Thẻ tín dụng, vay bạn"></div></div>'
+ +'<div class="field"><label for="d-amt">Số tiền nợ</label><div class="inp"><input id="d-amt" inputmode="numeric" autocomplete="off"><span>đ</span></div></div>'
+ +'<div class="field"><label for="d-rate">Lãi suất</label><div class="inp"><input id="d-rate" inputmode="decimal" autocomplete="off" placeholder="0"><span>%/năm</span></div></div>'
+ +'<div class="field"><label for="d-min">Trả tối thiểu mỗi tháng</label><div class="inp"><input id="d-min" inputmode="numeric" autocomplete="off"><span>đ</span></div></div>'
+ +'<div><button class="btn" id="d-add">Ghi nợ</button></div></div></details>'
+ +'<details id="dt-pay"><summary>Ghi trả nợ</summary><div class="fields" style="padding-bottom:12px">'
+ +'<div class="field"><label for="p-debt">Khoản nợ</label><div class="inp"><select id="p-debt"></select></div></div>'
+ +'<div class="field"><label for="p-amt">Số tiền trả</label><div class="inp"><input id="p-amt" inputmode="numeric" autocomplete="off"><span>đ</span></div></div>'
+ +'<div><button class="btn" id="p-add">Ghi trả nợ</button></div></div></details>'
+ +'<details id="dt-loan"><summary>Cho vay mới</summary><div class="fields" style="padding-bottom:12px">'
+ +'<div class="field"><label for="l-who">Người vay</label><div class="inp"><input id="l-who" type="text" autocomplete="off" placeholder="Tên người vay"></div></div>'
+ +'<div class="field"><label for="l-amt">Số tiền cho vay</label><div class="inp"><input id="l-amt" inputmode="numeric" autocomplete="off" placeholder="0"><span>đ</span></div></div>'
+ +'<div class="field"><label for="l-rate">Lãi suất (để trống nếu không lấy lãi)</label><div class="inp"><input id="l-rate" inputmode="decimal" autocomplete="off" placeholder="0"><span>%/năm</span></div></div>'
+ +'<div class="field"><label for="l-mo">Kỳ hạn</label><div class="inp"><input id="l-mo" inputmode="numeric" autocomplete="off" placeholder="0"><span>tháng</span></div></div>'
+ +'<div class="field"><label for="l-jar">Lấy tiền từ</label><div class="inp"><select id="l-jar"><option value="">Không trừ hũ nào, chỉ ghi nhận</option>'+opts+'</select></div></div>'
+ +'<div><button class="btn" id="l-add">Xác nhận cho vay</button></div></div></details>'
+ +'<details id="dt-back"><summary>Thu hồi tiền cho vay</summary><div class="fields" style="padding-bottom:12px">'
+ +'<div class="field"><label for="b-loan">Khoản cho vay</label><div class="inp"><select id="b-loan"></select></div></div>'
+ +'<div class="field"><label for="b-amt">Số tiền nhận lại</label><div class="inp"><input id="b-amt" inputmode="numeric" autocomplete="off" placeholder="0"><span>đ</span></div></div>'
+ +'<div class="field"><label for="b-int">Trong đó tiền lãi (nếu có)</label><div class="inp"><input id="b-int" inputmode="numeric" autocomplete="off" placeholder="0"><span>đ</span></div></div>'
+ +'<div><button class="btn" id="b-add">Xác nhận đã nhận</button></div><p class="fine">Tiền nhận lại vào mục "Chưa phân bổ" để bạn tự chia vào hũ. Khoản này không tính là thu nhập tháng.</p></div></details></div><p class="fine" id="d-msg" aria-live="polite"></p></section>'
+ +'<section class="sec" id="oth"></section><section class="sec hist" id="hist"></section>';
+ var el=$('#p-so-thu');el.innerHTML=h;
+ $('#q-date').value=Q.date;
+ bindMoney($('#q-amt'),function(v){Q.amt=v;Q.edited=false;renderPreview()});
+ $('#q-note').addEventListener('input',function(e){Q.note=e.target.value});
+ $('#q-date').addEventListener('change',function(e){Q.date=e.target.value||todayStr()});
+ $('#q-reset').addEventListener('click',function(){Q.edited=false;renderPreview()});
+ ['#s-amt','#d-amt','#d-min','#p-amt','#pool-amt'].forEach(function(i){bindMoney($(i),function(){})});
+ $('#pool-add').addEventListener('click',function(){var amt=numOf('#pool-amt'),pl=poolOf(S),j=$('#pool-jar').value;
+  if(!(amt>0)||amt>pl){$('#pool-msg').textContent=amt>pl?'Số tiền vượt phần chưa phân bổ ('+vnd(pl)+').':'Nhập số tiền lớn hơn 0.';return}
+  var sp={};sp[j]=amt;S.log.push({id:newId(),date:todayStr(),amt:0,kind:'alloc',note:'Phân bổ phần chưa chia',split:sp,rest:-amt});
+  S.touched=true;save();$('#pool-amt').value='';render();$('#pool-msg').textContent='Đã phân bổ '+vnd(amt)+' vào hũ '+jname(j)+'.'});
+ $('#q-add').addEventListener('click',function(){
+  if(!(Q.amt>0)){$('#q-msg').textContent='Nhập số tiền lớn hơn 0.';return}
+  if(syncAmt()){renderPreview();$('#q-msg').textContent='Số tiền trong ô đã được cập nhật. Kiểm tra lại cách chia rồi bấm xác nhận.';return}
+  var amt=Q.amt,r0=remOf();if(r0<0){$('#q-msg').textContent='Tổng các hũ đang vượt số tiền nhận.';return}
+  S.log.push({id:newId(),date:Q.date||todayStr(),amt:amt,kind:'in',note:Q.note,split:cloneSplit(),rest:r0});
+  S.touched=true;save();Q.amt=0;Q.note='';Q.edited=false;$('#q-amt').value='';$('#q-note').value='';render();
+  $('#q-msg').textContent='Đã ghi nhận '+vnd(amt)+(r0>0?', trong đó '+vnd(r0)+' chưa phân bổ':' và chia vào các hũ')+'. Xem số dư bên dưới.';
+ });
+ $('#s-add').addEventListener('click',function(){
+  var amt=numOf('#s-amt'),j=$('#s-jar').value;
+  if(!(amt>0)){$('#s-msg').textContent='Nhập số tiền lớn hơn 0.';return}
+  S.spend.push({id:newId(),date:todayStr(),jar:j,amt:amt,note:$('#s-note').value});
+  S.touched=true;save();$('#s-amt').value='';$('#s-note').value='';render();
+  $('#s-msg').textContent='Đã trừ '+vnd(amt)+' khỏi hũ '+jname(j)+'.';
+ });
+ $('#d-add').addEventListener('click',function(){
+  var amt=numOf('#d-amt');
+  if(!(amt>0)){$('#d-msg').textContent='Nhập số tiền nợ lớn hơn 0.';return}
+  S.debts.push({id:newId(),name:$('#d-name').value.trim()||'Khoản nợ',bal:amt,rate:cleanDec($('#d-rate')),min:numOf('#d-min')});
+  S.touched=true;save();['#d-name','#d-amt','#d-rate','#d-min'].forEach(function(i){$(i).value=''});render();
+  $('#d-msg').textContent='Đã ghi nợ '+vnd(amt)+'. Kế hoạch 6 hũ sẽ ưu tiên trả khoản này.';
+ });
+ $('#p-add').addEventListener('click',function(){
+  var d=S.debts.filter(function(x){return x.id===$('#p-debt').value})[0],amt=numOf('#p-amt');
+  if(!d||!(amt>0)){$('#d-msg').textContent='Chọn khoản nợ và nhập số tiền trả.';return}
+  var adj=Math.min(d.bal,amt);if(adj<=0){$('#d-msg').textContent='Khoản này đã trả hết.';return}
+  d.bal-=adj;S.spend.push({id:newId(),date:todayStr(),jar:'DEBT',amt:adj,note:'Trả '+d.name,debtId:d.id,debtAdj:adj});
+  S.touched=true;save();$('#p-amt').value='';render();
+  $('#d-msg').textContent='Đã trả '+vnd(adj)+' cho '+d.name+'. Còn nợ '+vnd(d.bal)+'.';
+ });
+ $('#l-add').addEventListener('click',function(){
+  var amt=numOf('#l-amt'),j=$('#l-jar').value,who=$('#l-who').value.trim()||'Người vay';
+  if(!(amt>0)){$('#d-msg').textContent='Nhập số tiền cho vay lớn hơn 0.';return}
+  if(j){var bl=balances(S)[j];if(amt>bl){$('#d-msg').textContent='Hũ '+jname(j)+' chỉ còn '+vnd(bl)+', không đủ để cho vay '+vnd(amt)+'.';return}}
+  var id=newId();
+  S.loans.push({id:id,date:todayStr(),who:who,amt:amt,rate:cleanDec($('#l-rate')),months:numOf('#l-mo'),jar:j,rec:0,intRec:0});
+  if(j)S.spend.push({id:newId(),date:todayStr(),jar:j,amt:amt,note:'Cho vay '+who,loanId:id});
+  S.touched=true;save();['#l-who','#l-amt','#l-rate','#l-mo'].forEach(function(i){$(i).value=''});render();
+  $('#d-msg').textContent='Đã ghi cho '+who+' vay '+vnd(amt)+(j?', trừ khỏi hũ '+jname(j):', chưa trừ hũ nào')+'.';
+ });
+ $('#b-add').addEventListener('click',function(){
+  var l=S.loans.filter(function(x){return x.id===$('#b-loan').value})[0],amt=numOf('#b-amt'),it=Math.min(numOf('#b-int'),amt);
+  if(!l||!(amt>0)){$('#d-msg').textContent='Chọn khoản cho vay và nhập số tiền nhận lại.';return}
+  var pr=Math.min(loanOut(l),amt-it);
+  if(amt-it>loanOut(l)){it=amt-pr}
+  l.rec=(l.rec||0)+pr;l.intRec=(l.intRec||0)+it;
+  S.log.push({id:newId(),date:todayStr(),amt:0,kind:'back',note:'Thu hồi cho vay '+l.who,split:{},rest:amt,loanId:l.id,prin:pr,int:it});
+  S.touched=true;save();['#b-amt','#b-int'].forEach(function(i){$(i).value=''});render();
+  $('#d-msg').textContent='Đã nhận '+vnd(amt)+' từ '+l.who+', còn cho vay '+vnd(loanOut(l))+'. Số tiền nằm ở mục "Chưa phân bổ".';
+ });
+ el.addEventListener('click',function(ev){
+  var b=ev.target.closest('[data-del]');if(!b)return;
+  if(!b.dataset.arm){b.dataset.arm='1';b.textContent='Xoá thật?';setTimeout(function(){if(b.isConnected){b.textContent='Xoá';delete b.dataset.arm}},3000);return}
+  var p=b.dataset.del.split(':'),id=p[1];
+  if(p[0]==='loan')delLoan(id);
+  else if(p[0]==='in'){S.log=S.log.filter(function(e){if(e.id===id){if(e.kind==='back'){var l=S.loans.filter(function(x){return x.id===e.loanId})[0];if(l){l.rec=Math.max(0,(l.rec||0)-(e.prin||0));l.intRec=Math.max(0,(l.intRec||0)-(e.int||0))}}return false}return true})}
+  else if(p[0]==='debt')S.debts=S.debts.filter(function(d){return d.id!==id});
+  else S.spend=S.spend.filter(function(e){if(e.id===id){if(e.loanId){delLoan(e.loanId);return false}if(e.debtId){var d=S.debts.filter(function(x){return x.id===e.debtId})[0];if(d)d.bal+=e.debtAdj}return false}return true});
+  save();render();
+ });
+}
+function remOf(){var t=0;KEYS.forEach(function(k){t+=Q.split[k]||0});return Q.amt-t}
+function cloneSplit(){var o={};KEYS.forEach(function(k){o[k]=Q.split[k]||0});return o}
+function updRem(){var r=remOf(),el=$('#pv-rem'),ok=Q.amt>0&&r>=0;
+ el.innerHTML=Q.amt>0?('Đã chia '+vnd(Q.amt-r)+' · '+(r===0?'<span class="up">Chia đủ, sẵn sàng xác nhận.</span>':(r>0?'<span class="dn">Còn '+vnd(r)+' chưa chia.</span> Nếu xác nhận, phần này nằm ở mục "Chưa phân bổ" để bạn phân bổ sau.':'<span class="dn">Đang chia vượt '+vnd(-r)+'. Giảm bớt một hũ.</span>'))):'Nhập số tiền để nhận gợi ý cách chia.';
+ $('#q-add').disabled=!ok}
+function syncAmt(){var fa=numOf('#q-amt');if(fa!==Q.amt){Q.amt=fa;Q.edited=false;return true}return false}
+function renderPreview(){
+ syncAmt();
+ var P=(window.__qtc&&window.__qtc.P1)||{NEC:55,FFA:10,LTSS:10,EDU:10,PLAY:10,GIVE:5,DEBT:0};
+ var sug=splitAmt(Q.amt,P),tot=0,h='';
+ if(!Q.edited)Q.split=sug;
+ KEYS.forEach(function(k){tot+=P[k]||0});
+ KEYS.forEach(function(k){
+  if(k==='DEBT'&&!(P.DEBT>0))return;
+  h+='<div class="pvr"><div class="nm"><span class="tag" style="background:var('+jcol(k)+')">'+k+'</span>'+jname(k)+'<small>'+esc(jwallet(k))+'</small></div><div class="sg">Gợi ý '+(tot&&P[k]?p1(P[k]/tot*100):'0%')+(Q.amt>0?' · '+vnd(sug[k]):'')+'</div><div class="inp"><input data-pv="'+k+'" inputmode="numeric" autocomplete="off" placeholder="0" aria-label="Số tiền chia vào hũ '+jname(k)+'" value="'+(Q.split[k]?fmt(Q.split[k]):'')+'"><span>đ</span></div></div>';
+ });
+ $('#pv').innerHTML=h;
+ $('#pv').querySelectorAll('[data-pv]').forEach(function(el){bindMoney(el,function(v){Q.split[el.dataset.pv]=v;Q.edited=true;updRem()})});
+ updRem();
+}
+function renderLedger(real,bal){
+ var cm=monthsAgo(0),alloc={},spent={},tot=0,st=incStats(real),nec=real.a.NEC;
+ KEYS.forEach(function(k){alloc[k]=0;spent[k]=0});
+ real.log.forEach(function(e){if(mk(e.date)===cm)KEYS.forEach(function(k){alloc[k]+=(e.split&&e.split[k])||0})});
+ real.spend.forEach(function(e){if(mk(e.date)===cm)spent[e.jar]+=e.amt});
+ var da=debtAgg(real);
+ var h='<h2>Số dư các hũ</h2><p class="lead">Số dư gồm số dư ban đầu của các ví bạn nhập ở tab Hồ sơ, cộng các khoản đã chia, trừ các khoản chi. Số dư hũ Tiết kiệm dài hạn và Tự do tài chính được cộng vào quỹ khẩn cấp và tài sản đầu tư ở tab Chẩn đoán.</p><div class="flow">';
+ KEYS.forEach(function(k){
+  if(k==='DEBT'&&!(da.debt>0)&&!bal.DEBT)return;
+  tot+=bal[k];
+  h+='<div class="s"><span><span class="tag" style="background:var('+jcol(k)+')">'+k+'</span>'+jname(k)+'</span><b class="'+(bal[k]<0?'neg':'')+'">'+vnd(bal[k])+'</b><small>Tháng này +'+sh(alloc[k])+' · chi −'+sh(spent[k])+' · '+jwallet(k)+(k!=='DEBT'&&bal[k]>0&&jarRate(real,k)>0?' · lãi ≈ '+sh(bal[k]*jarRate(real,k)/1200)+'/tháng':'')+'</small></div>';
+ });
+ var pool=Math.max(0,poolOf(real));$('#poolsec').hidden=!(pool>0);
+ if(pool>0){tot+=pool;h+='<div class="s"><span><span class="tag" style="background:var(--line-a)">—</span>Chưa phân bổ</span><b>'+vnd(pool)+'</b><small>Tiền đã nhận nhưng chưa chia vào hũ nào</small></div>'}
+ h+='<div class="s"><span>Tổng tiền đang có</span><b>'+vnd(tot)+'</b></div></div>';
+ if(nec>0)h+='<p class="fine">Hũ Thiết yếu hiện đủ cho '+p1(Math.max(0,bal.NEC)/nec)+' tháng chi thiết yếu ('+vnd(nec)+'/tháng).</p>';
+ $('#bal').innerHTML=h;
+ var dl='',ln=real.loans||[];
+ if(!real.debts.length&&!ln.length)dl='<p class="muted" style="font-size:14px">Chưa có khoản nợ hay cho vay nào. Khi vay, mua trả góp hoặc cho người khác vay, ghi ở các mục bên dưới.</p>';
+ else{dl='<div class="tw"><table><thead><tr><th>Loại</th><th class="w">Đối tượng</th><th>Còn lại</th><th>Lãi/năm</th><th class="w">Hạn · lãi</th><th></th></tr></thead><tbody>';
+  real.debts.forEach(function(d){dl+='<tr><td><span class="chip bad">Nợ</span></td><td class="w" style="color:var(--fg)">'+esc(d.name)+(d.bal<=0?' <span class="chip good">Đã trả hết</span>':'')+'</td><td class="dn">'+vnd(d.bal)+'</td><td>'+p1(d.rate)+'</td><td class="w">Trả tối thiểu '+sh(d.min)+'/tháng · lãi ≈ '+sh(d.bal*d.rate/1200)+'/tháng</td><td><button class="x" data-del="debt:'+d.id+'">Xoá</button></td></tr>'});
+  ln.forEach(function(l){var f=loanInfo(l);dl+='<tr><td><span class="chip good">Cho vay</span></td><td class="w" style="color:var(--fg)">'+esc(l.who)+(f.out<=0?' <span class="chip good">Đã thu hồi</span>':'')+'</td><td class="up">'+vnd(f.out)+'</td><td>'+p1(l.rate||0)+'</td><td class="w">'+(f.due?'Đến '+dfmt(f.due):'Không kỳ hạn')+(l.rate>0&&l.months>0?' · lãi dự kiến còn '+sh(f.intLeft):'')+'</td><td><button class="x" data-del="loan:'+l.id+'">Xoá</button></td></tr>'});
+  var la=loanAgg(real),dgt=debtAgg(real);
+  dl+='</tbody></table></div><p class="fine">Đang nợ '+vnd(dgt.debt)+' · đang cho vay '+vnd(la.out)+(la.int>0?' · lãi cho vay dự kiến '+vnd(la.int):'')+'. Tiền cho vay chưa thu về là khoản dự kiến, không tính vào tiền đang có.</p>'}
+ $('#debtlist').innerHTML=dl;
+ var bs=$('#b-loan'),bv=bs.value;
+ bs.innerHTML=ln.filter(function(l){return loanOut(l)>0}).map(function(l){return '<option value="'+l.id+'">'+esc(l.who)+' · còn '+sh(loanOut(l))+'</option>'}).join('')||'<option value="">Không có khoản cho vay</option>';
+ if(bv)bs.value=bv;
+ var sel=$('#p-debt'),pv=sel.value;
+ sel.innerHTML=real.debts.filter(function(d){return d.bal>0}).map(function(d){return '<option value="'+d.id+'">'+esc(d.name)+' · còn '+sh(d.bal)+'</option>'}).join('')||'<option value="">Không có nợ cần trả</option>';
+ if(pv)sel.value=pv;
+ var o='<h2>Thu nhập theo tháng</h2><div class="stats"><div><b>'+sh(st.cur)+'</b><small>Tháng này</small></div><div><b>'+(st.auto?sh(st.avg):'–')+'</b><small>Bình quân 3 tháng trước</small></div><div><b>'+(st.min!=null?sh(st.min):'–')+'</b><small>Tháng thấp nhất</small></div></div>';
+ var rows='';
+ for(var i=0;i<6;i++){var m=monthsAgo(i),t=sumIn(real,m);if(!t)continue;rows+='<tr><td>'+m.slice(5)+'/'+m.slice(0,4)+'</td><td>'+sh(t)+'</td><td>'+cntIn(real,m)+'</td></tr>'}
+ if(rows)o+='<div class="tw cmp"><table><thead><tr><th>Tháng</th><th>Tổng thu</th><th>Số khoản</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+ var ins=[];
+ if(!real.log.length)ins.push('Chưa có khoản thu nào. Ghi từng khoản ngay khi nhận để chia hũ trước khi kịp tiêu.');
+ if(st.done.length>=2)ins.push(st.cv>0.25?'Thu nhập dao động '+Math.round(st.cv*100)+'% giữa các tháng. Lập kế hoạch theo mức thấp nhất ('+sh(st.min)+'), phần vượt coi là thưởng.':'Thu nhập khá đều giữa các tháng (dao động '+Math.round(st.cv*100)+'%).');
+ if(st.min!=null&&nec>0&&st.min<nec)ins.push('Tháng thấp nhất ('+vnd(st.min)+') không phủ nổi chi thiết yếu ('+vnd(nec)+'). Giữ đệm 6 tháng và ưu tiên hũ Tiết kiệm dài hạn.');
+ if(nec>0)ins.push('Tự trả lương cho mình: mỗi tháng chỉ rút khoảng '+vnd(nec)+' từ hũ Thiết yếu. Tháng nhiều tiền hũ dày thêm, tháng ít tiền vẫn đủ chi.');
+ o+='<ul class="acts">'+ins.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>';
+ $('#oth').innerHTML=o;
+ function srt(a,b){return a.date<b.date?1:a.date>b.date?-1:(a.id<b.id?1:-1)}
+ var hh='<h2>Lịch sử</h2>',li=real.log.slice().sort(srt).slice(0,20),ls=real.spend.slice().sort(srt).slice(0,10);
+ if(!li.length&&!ls.length)hh+='<p class="muted" style="font-size:14px">Chưa có giao dịch. Khoản đầu tiên bạn ghi sẽ hiện ở đây.</p>';
+ hh+='<div class="flow">';
+ li.forEach(function(e){hh+='<div class="s"><span><span class="chip k">'+(e.kind==='alloc'?'Phân bổ':e.kind==='back'?'Thu hồi':'Thu')+'</span>'+dd(e.date)+(e.note?' · '+esc(e.note):'')+'</span><b class="'+(e.kind==='alloc'?'':'up')+'">'+(e.kind==='alloc'?'':'+')+vnd(e.kind==='alloc'?-e.rest:e.kind==='back'?e.prin+e.int:e.amt)+'</b><button class="x" data-del="in:'+e.id+'">Xoá</button><small>Chia: '+KEYS.filter(function(k){return e.split&&e.split[k]}).map(function(k){return k+' '+sh(e.split[k])}).join(' · ')+(e.rest>0?' · chưa phân bổ '+sh(e.rest):'')+'</small></div>'});
+ ls.forEach(function(e){hh+='<div class="s"><span><span class="chip k">Chi</span>'+dd(e.date)+' · '+jname(e.jar)+(e.note?' · '+esc(e.note):'')+'</span><b class="dn">−'+vnd(e.amt)+'</b><button class="x" data-del="out:'+e.id+'">Xoá</button></div>'});
+ hh+='</div>';$('#hist').innerHTML=hh;
+ renderPreview();
+}
+function syncIncome(real){var el=$('#f-income');if(!el)return;var st=incStats(real);
+ if(st.auto){el.value=st.base?fmt(st.base):'';el.disabled=true}
+ else{el.disabled=false;if(document.activeElement!==el)el.value=real.income?fmt(real.income):''}}
+
+/* ---------- biểu đồ ---------- */
+function chartCard(title,body,legend){return '<div class="chartbox"><h3>'+title+'</h3>'+body+(legend?'<div class="lg">'+legend+'</div>':'')+'</div>'}
+function lgItem(c,t){return '<span><i style="background:var('+c+')"></i>'+t+'</span>'}
+function barChart(cats,series){
+ var W=420,H=230,L=46,Rm=10,T=16,B=28,n=cats.length,m=series.length,all=[],i,j,v;
+ series.forEach(function(s){all=all.concat(s.vals)});
+ var mx=Math.max.apply(null,all.concat([0]));if(mx<=0)mx=1;var st=niceStep(mx/4);mx=Math.ceil(mx/st)*st;
+ var pw=W-L-Rm,ph=H-T-B,gw=pw/n,bw=Math.min(34,gw*0.78/m),g='';
+ function Y(x){return T+ph*(1-x/mx)}
+ for(v=0;v<=mx+st/2;v+=st)g+='<line class="grid" x1="'+L+'" x2="'+(W-Rm)+'" y1="'+Y(v).toFixed(1)+'" y2="'+Y(v).toFixed(1)+'"/><text x="'+(L-6)+'" y="'+(Y(v)+4).toFixed(1)+'" text-anchor="end">'+sh(v)+'</text>';
+ for(i=0;i<n;i++){
+  var x0=L+gw*i+(gw-bw*m)/2;
+  for(j=0;j<m;j++){var s=series[j],val=s.vals[i],col=s.colors?s.colors[i]:s.color;
+   g+='<rect x="'+(x0+bw*j).toFixed(1)+'" y="'+Y(val).toFixed(1)+'" width="'+(bw-2).toFixed(1)+'" height="'+Math.max(0,ph*val/mx).toFixed(1)+'" rx="2" style="fill:var('+col+')"><title>'+esc(cats[i])+' · '+esc(s.name)+': '+vnd(val)+'</title></rect>';
+   if(n*m<=9&&val>0)g+='<text x="'+(x0+bw*j+bw/2-1).toFixed(1)+'" y="'+(Y(val)-4).toFixed(1)+'" text-anchor="middle" style="font-size:10px">'+sh(val)+'</text>'}
+  g+='<text x="'+(L+gw*i+gw/2).toFixed(1)+'" y="'+(H-9)+'" text-anchor="middle">'+esc(cats[i])+'</text>'}
+ return '<svg class="ch" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Biểu đồ cột">'+g+'</svg>';
+}
+function lineChart(labels,series){
+ var W=420,H=230,L=50,Rm=14,T=16,B=28,n=labels.length,all=[],v,i;
+ series.forEach(function(s){all=all.concat(s.vals)});
+ var mx=Math.max.apply(null,all.concat([0])),mn=Math.min.apply(null,all.concat([0]));if(mx<=mn)mx=mn+1;
+ var st=niceStep((mx-mn)/4);mn=Math.floor(mn/st)*st;mx=Math.ceil(mx/st)*st;
+ function X(k){return n<2?L+(W-L-Rm)/2:L+(W-L-Rm)*k/(n-1)}
+ function Y(x){return T+(H-T-B)*(1-(x-mn)/(mx-mn))}
+ var g='';
+ for(v=mn;v<=mx+st/2;v+=st)g+='<line class="grid" x1="'+L+'" x2="'+(W-Rm)+'" y1="'+Y(v).toFixed(1)+'" y2="'+Y(v).toFixed(1)+'"/><text x="'+(L-6)+'" y="'+(Y(v)+4).toFixed(1)+'" text-anchor="end">'+sh(v)+'</text>';
+ var seen={};for(i=0;i<5;i++){var k=n<2?0:Math.round((n-1)*i/4);if(seen[k])continue;seen[k]=1;g+='<text x="'+X(k).toFixed(1)+'" y="'+(H-9)+'" text-anchor="'+(k===0?'start':k===n-1?'end':'middle')+'">'+esc(labels[k])+'</text>'}
+ series.forEach(function(s){
+  var d='';for(i=0;i<n;i++)d+=(i?'L':'M')+X(i).toFixed(1)+' '+Y(s.vals[i]).toFixed(1);
+  g+='<path d="'+d+'" style="fill:none;stroke:var('+s.color+');stroke-width:2.5"'+(s.dash?' stroke-dasharray="5 4"':'')+'/>';
+  g+='<circle cx="'+X(n-1).toFixed(1)+'" cy="'+Y(s.vals[n-1]).toFixed(1)+'" r="4" style="fill:var('+s.color+')"><title>'+esc(s.name)+': '+vnd(s.vals[n-1])+'</title></circle>'});
+ return '<svg class="ch" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Biểu đồ đường">'+g+'</svg>';
+}
+function pie(slices){
+ var tot=slices.reduce(function(t,s){return t+Math.max(0,s.v)},0);
+ if(!(tot>0))return '<p class="muted" style="font-size:14px;padding:4px 10px 10px">Chưa có dữ liệu.</p>';
+ var r=52,c=2*Math.PI*r,acc=0,g='',li='';
+ slices.forEach(function(s){if(!(s.v>0))return;var f=s.v/tot;
+  g+='<circle cx="80" cy="80" r="'+r+'" fill="none" stroke-width="28" style="stroke:var('+s.c+')" stroke-dasharray="'+(c*f).toFixed(2)+' '+c.toFixed(2)+'" stroke-dashoffset="'+(-c*acc).toFixed(2)+'" transform="rotate(-90 80 80)"><title>'+esc(s.n)+': '+vnd(s.v)+'</title></circle>';acc+=f;
+  li+='<li><i style="background:var('+s.c+')"></i><span>'+esc(s.n)+'</span><b>'+p1(f*100)+' · '+sh(s.v)+'</b></li>'});
+ return '<div class="pie"><svg viewBox="0 0 160 160" role="img" aria-label="Biểu đồ tròn">'+g+'<text x="80" y="84" text-anchor="middle" style="font-size:12px;fill:var(--fg);font-weight:600">'+sh(tot)+'</text></svg><ul>'+li+'</ul></div>';
+}
+
+/* ---------- tiết kiệm dài hạn ---------- */
+function addM(ds,m){var p=ds.split('-'),d=new Date(+p[0],+p[1]-1+m,+p[2]);return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
+function dfmt(ds){return ds.slice(8)+'/'+ds.slice(5,7)+'/'+ds.slice(0,4)}
+function monthsBetween(a,b){var x=a.split('-'),y=b.split('-'),m=(+y[0]-+x[0])*12+(+y[1]-+x[1]);if(+y[2]<+x[2])m--;return Math.max(0,m)}
+function termTxt(m){return m%12===0?(m/12)+' năm':m+' tháng'}
+function modeName(m){return m==='comp'?'Lãi kép (nhập gốc hàng tháng)':'Lãi đơn'}
+function lockedOf(s){return (s.deposits||[]).filter(function(d){return !d.settled}).reduce(function(t,d){return t+d.principal},0)}
+function poolOf(s){return s.log.reduce(function(t,e){return t+(e.rest||0)},0)}
+function dpInfo(d){var e=earn(d.principal,d.rate,d.months,d.mode),mat=addM(d.date,d.months),td=todayStr(),el=Math.min(d.months,monthsBetween(d.date,td)),it=Math.round(e.int);
+ return {e:e,mat:mat,matured:mat<=td,el:el,acc:el>0?e.rows[el-1].b-d.principal:0,int:it,total:d.principal+it}}
+function schedHtml(e,months,principal){
+ var st=months<=24?1:months<=60?3:12,h='',i;
+ for(i=0;i<e.rows.length;i++){var r=e.rows[i];if(r.m%st===0||r.m===months)h+='<tr><td>'+r.m+'</td><td>'+vnd(r.it)+'</td><td>'+vnd(r.b-principal)+'</td><td>'+vnd(r.b)+'</td></tr>'}
+ return '<div class="tw cmp"><table><thead><tr><th>Tháng</th><th>Lãi tháng</th><th>Lãi cộng dồn</th><th>Tổng giá trị</th></tr></thead><tbody>'+h+'</tbody></table></div>';
+}
+function readSave(){var dur=numOf('#v-dur'),y=$('#v-unit').value==='y';
+ return {amt:numOf('#v-amt'),rate:cleanDec($('#v-rate')),months:y?dur*12:dur,mode:$('#v-mode').value,src:$('#v-src').value,date:$('#v-date').value||todayStr()}}
+function srcAvail(s,bal,src){return src==='pool'?Math.max(0,poolOf(s)):Math.max(0,bal.LTSS-lockedOf(s))}
+function calcSave(){
+ var out=$('#sv-out'),ok=$('#v-ok'),bal=window.__qtc.bal,v=readSave(),av=srcAvail(S,bal,v.src);
+ if(!(v.amt>0&&v.months>0)){out.innerHTML='<p class="muted" style="font-size:14px">Nhập số tiền và thời gian để xem dự báo.</p>';ok.disabled=true;return}
+ var e=earn(v.amt,v.rate,v.months,v.mode),it=Math.round(e.int),mat=addM(v.date,v.months),lab=[],vals=[],flat=[];
+ for(var i=0;i<=v.months;i++){lab.push(i===0?'Nay':i+' th');vals.push(i===0?v.amt:e.rows[i-1].b);flat.push(v.amt)}
+ var h='<h3>Dự báo <span class="chip warn">Chưa ghi nhận</span></h3><div class="stats"><div><b>'+vnd(v.amt)+'</b><small>Tiền gốc ban đầu</small></div><div><b>'+vnd(it)+'</b><small>Tổng tiền lãi dự kiến</small></div><div><b>'+vnd(v.amt+it)+'</b><small>Tổng nhận khi đáo hạn ('+dfmt(mat)+')</small></div></div>';
+ h+=chartCard('Tăng trưởng dự kiến',lineChart(lab,[{name:'Tổng giá trị',color:'--brand',vals:vals},{name:'Tiền gốc',color:'--line-a',vals:flat,dash:true}]),lgItem('--brand','Tổng giá trị dự kiến')+lgItem('--line-a','Tiền gốc'));
+ h+=schedHtml(e,v.months,v.amt);
+ h+='<p class="fine">'+modeName(v.mode)+' với lãi suất '+p1(v.rate)+'/năm trong '+termTxt(v.months)+'. Chưa tính thuế, phí hay rút trước hạn.</p>';
+ if(v.amt>av)h+='<p class="fine dn">Số tiền vượt phần đang có ở nguồn đã chọn ('+vnd(av)+').</p>';
+ out.innerHTML=h;ok.disabled=v.amt>av;updHints();
+}
+function buildSave(){
+ var h='<section class="sec"><h2>Tư vấn gửi tiết kiệm dài hạn</h2><p class="lead">Có khoản tiền chưa cần dùng? Trợ lý chỉ đề xuất và dự báo. Không có gì được chuyển hay ghi vào số dư cho đến khi bạn bấm xác nhận.</p><div id="sv-adv"></div>'
+ +'<div class="fields"><div class="field"><label for="v-amt">Số tiền dự định gửi</label><div class="inp"><input id="v-amt" inputmode="numeric" autocomplete="off" placeholder="0"><span>đ</span></div></div>'
+ +'<div class="field"><label for="v-rate">Lãi suất</label><div class="inp"><input id="v-rate" inputmode="decimal" autocomplete="off" placeholder="0"><span>%/năm</span></div></div>'
+ +'<div class="field"><label for="v-dur">Thời gian gửi</label><div class="inp"><input id="v-dur" inputmode="numeric" autocomplete="off" placeholder="0"><select id="v-unit" class="u" aria-label="Đơn vị thời gian"><option value="m">tháng</option><option value="y">năm</option></select></div></div>'
+ +'<div class="field"><label for="v-mode">Hình thức tính lãi</label><div class="inp"><select id="v-mode"><option value="simple">Lãi đơn</option><option value="comp">Lãi kép (nhập gốc hàng tháng)</option></select></div></div>'
+ +'<div class="field"><label for="v-src">Lấy tiền từ</label><div class="inp"><select id="v-src"><option value="ltss"></option><option value="pool"></option></select></div></div>'
+ +'<div class="field"><label for="v-date">Ngày gửi</label><div class="inp"><input id="v-date" type="date"></div></div></div>'
+ +'<div id="sv-out"></div><div><button class="btn" id="v-ok" disabled>Xác nhận gửi tiết kiệm</button></div><p class="fine" id="v-msg" aria-live="polite"></p></section>'
+ +'<section class="sec" id="sv-assets"></section>';
+ var el=$('#p-tiet-kiem');el.innerHTML=h;$('#v-date').value=todayStr();
+ bindMoney($('#v-amt'),calcSave);bindMoney($('#v-dur'),calcSave);
+ ['#v-rate'].forEach(function(i){$(i).addEventListener('input',function(){cleanDec($(i));calcSave()})});
+ ['#v-unit','#v-mode','#v-src','#v-date'].forEach(function(i){$(i).addEventListener('change',calcSave)});
+ $('#v-ok').addEventListener('click',function(){
+  var v=readSave(),av=srcAvail(S,window.__qtc.bal,v.src);
+  if(!(v.amt>0&&v.months>0)||v.amt>av){$('#v-msg').textContent='Kiểm tra lại số tiền, thời gian và nguồn tiền.';return}
+  if(v.src==='pool'){var sp={LTSS:v.amt};S.log.push({id:newId(),date:todayStr(),amt:0,kind:'alloc',note:'Phân bổ để gửi tiết kiệm',split:sp,rest:-v.amt})}
+  S.deposits.push({id:newId(),date:v.date,principal:v.amt,rate:v.rate,months:v.months,mode:v.mode});
+  S.touched=true;save();['#v-amt','#v-rate','#v-dur'].forEach(function(i){$(i).value=''});render();
+  $('#v-msg').textContent='Đã ghi nhận khoản gửi '+vnd(v.amt)+'. Khoản này nằm trong mục Tài sản dài hạn bên dưới.';
+ });
+ el.addEventListener('click',function(ev){
+  var u=ev.target.closest('#sv-use');
+  if(u){$('#v-amt').value=fmt(parseInt(u.dataset.v,10));calcSave();return}
+  var st=ev.target.closest('[data-settle]');
+  if(st){var d=S.deposits.filter(function(x){return x.id===st.dataset.settle})[0];if(!d||d.settled)return;var inf=dpInfo(d);if(!inf.matured)return;
+   if(inf.int>0)S.log.push({id:newId(),date:todayStr(),amt:inf.int,kind:'in',note:'Lãi tiết kiệm gửi '+dfmt(d.date),split:{LTSS:inf.int},rest:0});
+   d.settled=true;d.settledDate=todayStr();save();render();return}
+  var b=ev.target.closest('[data-delep]');if(!b)return;
+  if(!b.dataset.arm){b.dataset.arm='1';b.textContent='Xoá thật?';setTimeout(function(){if(b.isConnected){b.textContent='Xoá khoản này';delete b.dataset.arm}},3000);return}
+  S.deposits=S.deposits.filter(function(x){return x.id!==b.dataset.delep});save();render();
+ });
+}
+function renderSave(real,bal){
+ var q=window.__qtc,nec=real.a.NEC,irr=q.irr,mon=irr?6:3,res=nec*mon,locked=lockedOf(real),free=Math.max(0,bal.LTSS-locked),pool=Math.max(0,poolOf(real)),lock=nec>0?Math.max(0,free-res):0;
+ var it=[];
+ it.push('Hũ Tiết kiệm dài hạn đang có '+vnd(bal.LTSS)+': đã gửi kỳ hạn '+vnd(locked)+', còn linh hoạt '+vnd(free)+'.');
+ if(nec>0){it.push('Quỹ khẩn cấp nên giữ linh hoạt '+vnd(res)+' ('+mon+' tháng chi thiết yếu'+(irr?', vì thu nhập của bạn không đều':'')+').');
+  it.push(lock>0?'Gợi ý: có thể gửi kỳ hạn tối đa '+vnd(lock)+' mà vẫn đủ quỹ khẩn cấp.':'Gợi ý: chưa nên khoá tiền kỳ hạn, quỹ khẩn cấp còn thiếu '+vnd(Math.max(0,res-free))+'.')}
+ else it.push('Nhập chi thiết yếu ở tab Hồ sơ để web tính mức cần giữ lại làm quỹ khẩn cấp.');
+ if(pool>0)it.push('Bạn còn '+vnd(pool)+' chưa phân bổ. Có thể chọn nguồn "Tiền chưa phân bổ" để gửi trực tiếp.');
+ if(irr)it.push('Thu nhập không đều: cân nhắc chia thành 2 đến 3 khoản có kỳ hạn khác nhau để luôn có khoản đáo hạn.');
+ $('#sv-adv').innerHTML='<div class="box"><h3>Gợi ý dựa trên số liệu của bạn</h3><ul class="acts" style="margin-top:8px">'+it.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul>'+(lock>0?'<div style="margin-top:10px"><button class="btn ghost" id="sv-use" data-v="'+lock+'">Dùng số gợi ý '+vnd(lock)+'</button></div>':'')+'</div>';
+ var so=$('#v-src').options;so[0].textContent='Hũ Tiết kiệm dài hạn (còn linh hoạt '+sh(free)+')';so[1].textContent='Tiền chưa phân bổ ('+sh(pool)+')';
+ calcSave();
+ var ds=real.deposits,act=ds.filter(function(d){return !d.settled}),h='<h2>Tài sản dài hạn đã xác nhận</h2>';
+ if(!ds.length){h+='<p class="muted" style="font-size:14px">Chưa có khoản tiết kiệm nào được xác nhận. Các khoản chỉ dự báo ở trên không được tính vào đây.</p>'}
+ else{
+  var P=0,I=0,T=0;act.forEach(function(d){var f=dpInfo(d);P+=d.principal;I+=f.int;T+=f.total});
+  h+='<div class="stats"><div><b>'+vnd(P)+'</b><small>Tổng tiền gốc đang gửi</small></div><div><b>'+vnd(I)+'</b><small>Tổng lãi dự kiến</small></div><div><b>'+vnd(T)+'</b><small>Giá trị dự kiến khi đáo hạn</small></div></div><p class="fine">Lãi và giá trị dự kiến là tiền sẽ nhận trong tương lai, chưa phải tiền đang có. Chỉ khoản bạn đã xác nhận mới được tính ở đây.</p><div class="princ">';
+  ds.slice().sort(function(a,b){return a.date<b.date?1:-1}).forEach(function(d){
+   var f=dpInfo(d),stt=d.settled?'<span class="chip good">Đã tất toán</span>':f.matured?'<span class="chip warn">Đã đáo hạn</span>':'<span class="chip k">Đang gửi</span>';
+   h+='<details><summary><span>'+dfmt(d.date)+' · '+vnd(d.principal)+' · '+p1(d.rate)+'/năm · '+termTxt(d.months)+'</span>'+stt+'</summary><div class="stats"><div><b>'+dfmt(f.mat)+'</b><small>Ngày đáo hạn</small></div><div><b>'+vnd(f.int)+'</b><small>Lãi dự kiến cả kỳ</small></div><div><b>'+vnd(f.total)+'</b><small>Nhận về dự kiến</small></div><div><b>'+vnd(Math.round(f.acc))+'</b><small>Lãi tích luỹ đến nay ('+f.el+'/'+d.months+' tháng)</small></div></div><p class="fine">'+modeName(d.mode)+'</p>'+schedHtml(f.e,d.months,d.principal)
+    +'<div style="display:flex;gap:10px;flex-wrap:wrap;padding:10px 0">'+(f.matured&&!d.settled?'<button class="btn" data-settle="'+d.id+'">Xác nhận đã nhận lãi và tất toán</button>':'')+'<button class="x" data-delep="'+d.id+'">Xoá khoản này</button></div></details>'});
+  h+='</div>'}
+ $('#sv-assets').innerHTML=h;
+}
+
+/* ---------- thống kê ---------- */
+var TXALL=false;
+function buildStats(){
+ $('#p-thong-ke').innerHTML='<section class="sec" id="st-kpi"></section><section class="sec" id="st-charts"></section><section class="sec" id="st-tx"></section>';
+ $('#p-thong-ke').addEventListener('click',function(ev){var b=ev.target.closest('[data-tx]');if(!b)return;TXALL=b.dataset.tx==='all';render()});
+}
+function inM(s,m){return s.log.filter(function(e){return e.kind!=='alloc'&&mk(e.date)===m}).reduce(function(t,e){return t+e.amt},0)}
+function spM(s,m){return s.spend.filter(function(e){return !e.loanId&&mk(e.date)===m}).reduce(function(t,e){return t+e.amt},0)}
+function alM(s,m){var o={};KEYS.forEach(function(k){o[k]=0});s.log.forEach(function(e){if(mk(e.date)===m)KEYS.forEach(function(k){o[k]+=(e.split&&e.split[k])||0})});return o}
+function renderStats(real,bal){
+ var cm=monthsAgo(0),inc=inM(real,cm),sp=spM(real,cm),al=alM(real,cm),alT=0,pool=Math.max(0,poolOf(real)),tot=0;
+ KEYS.forEach(function(k){alT+=al[k];tot+=bal[k]});tot+=pool;
+ var lA=loanAgg(real),act=real.deposits.filter(function(d){return !d.settled}),dI=0,dT=0,near=null;
+ act.forEach(function(d){var f=dpInfo(d);dI+=f.int;dT+=f.total;if(!near||f.mat<near.mat)near={mat:f.mat,total:f.total}});
+ var h='<h2>Tháng '+cm.slice(5)+'/'+cm.slice(0,4)+'</h2><div class="stats"><div><b>'+vnd(inc)+'</b><small>Tổng thu nhập</small></div><div><b>'+vnd(sp)+'</b><small>Tổng chi tiêu</small></div><div><b>'+vnd(alT)+'</b><small>Tổng đã phân bổ vào hũ</small></div><div><b>'+(inc>0?p1(alT/inc*100):'–')+'</b><small>Tỷ lệ phân bổ thu nhập</small></div></div>'
+ +'<h3 class="subh">Tiền đang có</h3><div class="stats"><div><b>'+vnd(tot)+'</b><small>Số dư hiện tại</small></div><div><b>'+vnd(bal.LTSS)+'</b><small>Tổng tiền tiết kiệm (hũ dài hạn)</small></div><div><b>'+vnd(pool)+'</b><small>Chưa phân bổ</small></div></div>'
+ +'<h3 class="subh">Dự kiến, chưa nhận</h3><div class="stats"><div><b>'+vnd(lA.out)+'</b><small>Đang cho vay (gốc chưa thu)</small></div><div><b>'+vnd(lA.int)+'</b><small>Lãi cho vay dự kiến</small></div><div><b>'+vnd(dI)+'</b><small>Lãi tiết kiệm dự kiến</small></div><div><b>'+vnd(dT)+'</b><small>Giá trị dự kiến khi đáo hạn</small></div><div><b>'+(near?dfmt(near.mat):'–')+'</b><small>Đáo hạn gần nhất</small></div></div>';
+ h+='<h3 class="subh">Tỷ lệ phân bổ theo hũ (tháng này)</h3><div class="tw cmp"><table><thead><tr><th>Hũ</th><th>Đã phân bổ</th><th>% thu nhập</th><th>Số dư</th></tr></thead><tbody>';
+ KEYS.forEach(function(k){if(k==='DEBT'&&!al.DEBT&&!bal.DEBT)return;h+='<tr><td><span class="tag" style="background:var('+jcol(k)+')">'+k+'</span>'+jname(k)+'</td><td>'+vnd(al[k])+'</td><td>'+(inc>0?p1(al[k]/inc*100):'–')+'</td><td>'+vnd(bal[k])+'</td></tr>'});
+ h+='</tbody></table></div>';
+ $('#st-kpi').innerHTML=h;
+ var c='<h2>Biểu đồ</h2>';
+ c+=chartCard('Thu nhập, chi tiêu và phân bổ tháng này',barChart(['Thu nhập','Chi tiêu','Phân bổ'],[{name:'Tháng này',colors:['--good','--bad','--brand'],vals:[inc,sp,alT]}]));
+ var jk=JARS.map(function(j){return j.k}),jc=JARS.map(function(j){return j.c});
+ c+=chartCard('Phân bổ giữa các hũ',barChart(jk,[{name:'Phân bổ tháng này',color:'--brand',vals:jk.map(function(k){return al[k]})},{name:'Số dư hiện tại',color:'--line-a',vals:jk.map(function(k){return Math.max(0,bal[k])})}]),lgItem('--brand','Phân bổ tháng này')+lgItem('--line-a','Số dư hiện tại'));
+ var ms=[5,4,3,2,1,0].map(monthsAgo),sv=ms.map(function(m){var a=alM(real,m);return a.FFA+a.LTSS});
+ c+=chartCard('So sánh các tháng',barChart(ms.map(function(m){return m.slice(5)+'/'+m.slice(2,4)}),[{name:'Thu nhập',color:'--good',vals:ms.map(function(m){return inM(real,m)})},{name:'Chi tiêu',color:'--bad',vals:ms.map(function(m){return spM(real,m)})},{name:'Tiết kiệm',color:'--c-ltss',vals:sv}]),lgItem('--good','Thu nhập')+lgItem('--bad','Chi tiêu')+lgItem('--c-ltss','Tiết kiệm và đầu tư'));
+ var dm={};real.log.forEach(function(e){if(e.kind!=='alloc'&&e.amt)dm[e.date]=(dm[e.date]||0)+e.amt});real.spend.forEach(function(e){dm[e.date]=(dm[e.date]||0)-e.amt});
+ var dk=Object.keys(dm).sort(),open=real.plat.reduce(function(t,p){return t+p.bal0},0),run=open,lb=['Ban đầu'],vs=[open];
+ dk.forEach(function(d){run+=dm[d];lb.push(dd(d));vs.push(run)});
+ c+=chartCard('Số dư theo thời gian',dk.length?lineChart(lb,[{name:'Số dư',color:'--brand',vals:vs}]):'<p class="muted" style="font-size:14px;padding:4px 10px 10px">Cần ít nhất một giao dịch để vẽ biểu đồ.</p>');
+ if(act.length){
+  var t0=act.map(function(d){return d.date}).sort()[0],N=0,pre=act.map(function(d){var off=monthsBetween(t0,d.date);N=Math.max(N,off+d.months);return {d:d,off:off,e:earn(d.principal,d.rate,d.months,d.mode)}});
+  N=Math.min(N,120);var lb2=[],v1=[],v2=[],t;
+  for(t=0;t<=N;t++){var a1=0,a2=0;pre.forEach(function(p){if(t<p.off)return;var e2=Math.min(t-p.off,p.d.months);a1+=e2===0?p.d.principal:p.e.rows[e2-1].b;a2+=p.d.principal});lb2.push(addM(t0,t).slice(5,7)+'/'+addM(t0,t).slice(2,4));v1.push(a1);v2.push(a2)}
+  c+=chartCard('Tăng trưởng tiết kiệm dài hạn (dự kiến)',lineChart(lb2,[{name:'Giá trị dự kiến',color:'--brand',vals:v1},{name:'Tiền gốc',color:'--line-a',vals:v2,dash:true}]),lgItem('--brand','Giá trị dự kiến')+lgItem('--line-a','Tiền gốc'));
+ }else c+=chartCard('Tăng trưởng tiết kiệm dài hạn (dự kiến)','<p class="muted" style="font-size:14px;padding:4px 10px 10px">Chưa có khoản tiết kiệm nào được xác nhận.</p>');
+ var sl=JARS.map(function(j){return {n:j.n,v:Math.max(0,bal[j.k]),c:j.c}});if(pool>0)sl.push({n:'Chưa phân bổ',v:pool,c:'--line-a'});
+ c+=chartCard('Tỷ trọng tiền trong từng hũ',pie(sl));
+ var sv2=al.FFA+al.LTSS,oth=alT-sv2;
+ c+=chartCard('Thu nhập tháng này đã đi đâu',pie([{n:'Đã chi tiêu',v:sp,c:'--bad'},{n:'Tiết kiệm và đầu tư',v:sv2,c:'--c-ltss'},{n:'Phân bổ các hũ khác',v:Math.max(0,oth-sp),c:'--brand'},{n:'Chưa phân bổ',v:Math.max(0,inc-alT),c:'--line-a'}]));
+ $('#st-charts').innerHTML=c;
+ var rows=[];
+ real.log.forEach(function(e){
+  if(e.kind==='back')rows.push({d:e.date,id:e.id,c:e.note+(e.rest>0?' (chưa phân bổ '+sh(e.rest)+')':''),a:e.prin+e.int,cat:'Thu hồi cho vay',n:0});
+  else if(e.kind==='alloc')rows.push({d:e.date,id:e.id,c:'Phân bổ vào hũ '+KEYS.filter(function(k){return e.split&&e.split[k]}).map(jname).join(', '),a:-e.rest,cat:'Phân bổ',n:0});
+  else rows.push({d:e.date,id:e.id,c:(e.note||'Thu nhập')+(e.rest>0?' (chưa phân bổ '+sh(e.rest)+')':''),a:e.amt,cat:'Thu nhập',n:1})});
+ real.spend.forEach(function(e){rows.push({d:e.date,id:e.id,c:e.note||'Chi từ hũ '+jname(e.jar),a:-e.amt,cat:'Chi · '+jname(e.jar),n:2})});
+ (real.loans||[]).forEach(function(l){if(!l.jar)rows.push({d:l.date,id:l.id,c:'Cho '+l.who+' vay, chưa trừ hũ',a:-l.amt,cat:'Cho vay',n:0})});
+ real.spend.forEach(function(e){if(e.loanId){var r=rows.filter(function(x){return x.id===e.id})[0];if(r)r.cat='Cho vay'}});
+ real.deposits.forEach(function(d){rows.push({d:d.date,id:d.id,c:'Gửi tiết kiệm '+p1(d.rate)+'/năm, '+termTxt(d.months),a:d.principal,cat:'Tiết kiệm dài hạn',n:0})});
+ var fl=rows.filter(function(r){return TXALL||mk(r.d)===cm}).sort(function(a,b){return a.d<b.d?1:a.d>b.d?-1:(a.id<b.id?1:-1)});
+ var th='<h2>Giao dịch</h2><div class="seg" role="group" aria-label="Phạm vi"><button data-tx="m" aria-pressed="'+!TXALL+'">Tháng này</button><button data-tx="all" aria-pressed="'+TXALL+'">Tất cả</button></div>';
+ if(!fl.length)th+='<p class="muted" style="font-size:14px">Chưa có giao dịch trong phạm vi này.</p>';
+ else{th+='<div class="tw"><table><thead><tr><th>Ngày</th><th class="w">Nội dung</th><th>Số tiền</th><th class="w">Danh mục</th></tr></thead><tbody>';
+  fl.slice(0,60).forEach(function(r){th+='<tr><td>'+dd(r.d)+'</td><td class="w" style="color:var(--fg)">'+esc(r.c)+'</td><td class="'+(r.n===1?'up':r.n===2?'dn':'')+'">'+(r.n===1?'+':r.n===2?'':'')+vnd(r.a)+'</td><td class="w">'+esc(r.cat)+'</td></tr>'});
+  th+='</tbody></table></div>'+(fl.length>60?'<p class="fine">Hiển thị 60 giao dịch gần nhất.</p>':'')}
+ $('#st-tx').innerHTML=th;
+}
+
+/* ---------- orchestration ---------- */
+function render(){
+ var real=S,bal=balances(real);
+ JARS.forEach(function(j){j.w=walletOf(real,j.k)});
+ S=eff(real,bal);
+ try{
+  var R=analyze(S),P1=makePlan(S,R),P2=plan2(S,R),sm=simulate(S,R,P1,P2);
+  $('#hscore').textContent=R.inc?R.score:'–';
+  renderNote();renderDiag(R);renderStrat(R,P1,P2,sm);renderProj(R,P1,P2,sm);
+  window.__qtc={R:R,P1:P1,P2:P2,sm:sm,bal:bal,irr:S.irregular};
+ }finally{S=real}
+ syncIncome(real);renderLedger(real,bal);renderWal(real,bal);syncPlat(real,bal);renderSave(real,bal);renderStats(real,bal);updHints();
+}
+var TABS=['so-thu','tiet-kiem','thong-ke','ho-so','chan-doan','chien-luoc','du-phong'];
+function go(t,noScroll){
+ if(TABS.indexOf(t)<0)t='so-thu';
+ TABS.forEach(function(x){$('#p-'+x).classList.toggle('on',x===t)});
+ document.querySelectorAll('nav button').forEach(function(b){b.setAttribute('aria-selected',String(b.dataset.tab===t))});
+ if(location.hash!=='#'+t)location.hash=t;
+ if(!noScroll)window.scrollTo(0,0);
+}
+document.querySelectorAll('nav button').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.tab)})});
+window.addEventListener('hashchange',function(){go(location.hash.slice(1),true)});
+document.addEventListener('focusin',function(e){var t=e.target;if(t&&t.matches&&t.matches('input[inputmode="numeric"],input[inputmode="decimal"]'))setTimeout(function(){try{t.select()}catch(x){}},0)});
+window.addEventListener('pageshow',function(){if(syncAmt())renderPreview()});
+buildInputs();buildLedger();buildProj();buildSave();buildStats();render();
+if(location.hash)go(location.hash.slice(1),true);
+})();
+</script>
+
+<div style="text-align:center;padding:18px 12px 28px;font-size:13px"><button id="oldexp" style="font:inherit;padding:8px 14px">Xuất dữ liệu để chuyển sang bản đồng bộ</button><div id="oldmsg" style="margin-top:8px;color:#666"></div></div>
+<script>document.getElementById('oldexp').onclick=function(){
+ var chk={};for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(k&&k.indexOf('qtc.chk.')===0)chk[k]=localStorage.getItem(k)}
+ var s=localStorage.getItem('qtc.v2');
+ if(!s){document.getElementById('oldmsg').textContent='Không tìm thấy dữ liệu trong trình duyệt này. Hãy mở file bằng đúng trình duyệt bạn đã dùng trước đây.';return}
+ var blob=new Blob([JSON.stringify({qtc:1,s:s,chk:chk,ts:Date.now()})],{type:'application/json'});
+ var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='quy-tai-chinh-sao-luu.json';document.body.appendChild(a);a.click();a.remove();
+ document.getElementById('oldmsg').textContent='Đã tải file quy-tai-chinh-sao-luu.json.'}</script>
+</body></html>
